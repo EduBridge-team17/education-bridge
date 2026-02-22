@@ -1,16 +1,23 @@
 import { useState } from 'react'
 import './index.css'
+import { Route, Routes } from 'react-router-dom'
+import NavBar from './component/NavBar'
+import Home from './pages/Home'
+import Login from './pages/auth/login'
+import SignUp from './pages/auth/SignUp'
+import Header from './component/Header'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <div className="min-h-screen bg-primary-400 flex items-center justify-center">
-        <h1 className="text-primary-2000 text-3xl font-bold">
-          Education bridge Website
-        </h1>
-      </div>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+      </Routes>
     </>
   )
 }

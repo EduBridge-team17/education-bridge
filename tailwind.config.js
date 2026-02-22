@@ -8,7 +8,7 @@ export default {
     extend: {
       fontFamily: {
         primary: ['Euclid Circular B', 'sans-serif'], //mobile
-        secondary: ['Helvetica Neue', 'sans-serif'], //secondary
+        secondary: ['Helvetica Neue', 'sans-serif'], //desktop
       },
       colors: {
         primary: {
