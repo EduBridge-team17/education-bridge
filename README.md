@@ -1,16 +1,104 @@
-# React + Vite
+# Education Bridge Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Education Bridge is a mobile-first web application designed to connect students, teachers, NGOs, and education stakeholders to improve access to learning resources in underserved communities.
 
-Currently, two official plugins are available:
+This project is the Web MVP built with React and Tailwind CSS.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React (Vite)
+- Tailwind CSS
+- JavaScript (ES6+)
+- React Router DOM
+- GitHub for version control
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📦 Project Setup
+
+### 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/EduBridge-team17/education-bridge
+cd education-bridge
+```
+
+### 2️⃣ Install Dependencies
+
+```bash
+npm install
+```
+
+### 3️⃣ Environment Configuration
+
+Create a `.env` file in the project root with necessary environment variables.
+
+---
+
+## 🏃 Running the Application
+
+### Development Mode
+
+```bash
+npm run dev
+```
+
+The application will start at `http://localhost:5173`
+
+### Production Build
+
+```bash
+npm run build
+```
+
+### Preview Build
+
+```bash
+npm run preview
+```
+
+---
+
+## 📁 Project Structure
+
+```
+education-bridge/
+├── src/
+│   ├── component/          # Reusable UI components
+│   ├── pages/              # Page components
+│   │   └── auth/          # Authentication pages (Login, Register)            # Rou
+│   ├── services/           # API services
+│   ├── assets/             # Images and icons
+│   ├── App.jsx            # Main app component
+│   └── main.jsx           # Entry point
+├── public/                 # Static assets
+├── index.html             # HTML template
+├── package.json           # Project dependencies
+├── vite.config.js         # Vite configuration
+├── tailwind.config.js     # Tailwind CSS configuration
+└── README.md              # Project documentation
+```
+
+---
+
+## 🔧 Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+
+---
+
+---
+
+## 📄 License
+
+
+
+---
+
+## 📧 Support
+
+For questions or support, please reach out to the development team or open an issue in the repository.
