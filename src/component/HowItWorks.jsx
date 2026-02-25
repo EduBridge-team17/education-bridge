@@ -2,6 +2,7 @@ import {
   MapPin,
   WifiOff,
   Smartphone,
+  ArrowRight,
 } from 'lucide-react';
 
 import grad from '../assets/images/grad.svg';
@@ -73,7 +74,62 @@ const HowItWorks = () => {
             </div>
         </section>
 
-        
+        {/*SUSTAINABLE FUTURE */}
+        <section className="bg-primary-800 py-20 px-4 md:px-10 text-neutral-50 font-secondary">
+            <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 className="text-display3 md:text-4xl font-primary">
+                    Building a Sustainable Future
+                </h2>
+
+                <p className="mt-2 text-p3 text-primary-50 max-w-lg leading-relaxed">
+                Education Bridge is committed to the United Nations
+                Sustainable Development Goals. We believe that
+                quality education should be accessible to everyone,
+                everywhere, regardless of internet connectivity.
+                </p>
+
+                <button className="mt-4 text-sm inline-flex items-center gap-2 text-neutral-50 font-semibold hover:gap-3 transition-all">
+                    Read our Impact Report
+                    <ArrowRight size={16} />
+                </button>
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-6">
+                    <div className="bg-primary-700 rounded-2xl p-8 text-center backdrop-blur-md">
+                        <div className="w-18 h-18 rounded-xl flex items-center justify-center mx-auto">
+                            <img src={QualityEducation} alt="Quality Education Icon" />
+                        </div>
+
+                        <h4 className="font-semibold text-lg">
+                            Quality Education
+                        </h4>
+
+                        <p className=" text-primary-100 text-sm">
+                            Ensuring inclusive and equitable learning.
+                        </p>
+                    </div>
+
+                    <div className="bg-primary-700 rounded-xl p-8 text-center">
+                        <div className="w-18 h-18 rounded-lg flex items-center justify-center mx-auto">
+                            <img src={partnership} alt="partnership Icon"/>
+                        </div>
+
+                        <h4 className="text-h3 font-primary">
+                        Partnerships
+                        </h4>
+
+                        <p className="text-sm text-primary-100">
+                            Collaborating for greater impact.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+
         <section className="py-20 px-6 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center font-secondary">
             <div className="relative rounded-xl overflow-hidden shadow-lg h-[382px]">
                 <img 
