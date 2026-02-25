@@ -1,9 +1,4 @@
-import {
-  MapPin,
-  WifiOff,
-  Smartphone,
-  ArrowRight,
-} from 'lucide-react';
+import { MapPin, WifiOff, Smartphone, ArrowRight } from 'lucide-react';
 
 import grad from '../assets/images/grad.svg';
 import offline from '../assets/images/offline.svg';
@@ -14,173 +9,187 @@ import map from '../assets/images/map.png';
 const HowItWorks = () => {
   return (
     <>
-        <section id='about' className='py-16 px-4 md:px-10 font-secondary'>
-            <div className='max-w-6xl mx-auto text-center'>
-                <h2 className='text-display3 font-bold font-primary text-primary-2000'>
-                    How Education Bridge Works
-                </h2>
+      <section id='about' className='py-16 px-4 md:px-10 font-secondary'>
+        <div className='max-w-6xl mx-auto text-center'>
+          <h2 className='text-display3 font-bold font-primary text-primary-2000'>
+            How Education Bridge Works
+          </h2>
 
-                <p className='mt-3 text-p4 text-neutral-2000 max-w-xl mx-auto'>
-                    We've simplified the learning curve so you can focus on what
-                    matters: your education.
-                </p>
+          <p className='mt-3 text-p4 text-neutral-2000 max-w-xl mx-auto'>
+            We've simplified the learning curve so you can focus on what
+            matters: your education.
+          </p>
 
-                <div className='mt-12 grid gap-6 md:grid-cols-3 text-left'>
-                    <div className='bg-neutral-300 rounded-xl p-6'>
-                        <div className='w-10 h-10 bg-secondary-100 rounded-full flex items-center justify-center mb-4'>
-                            <img src= {grad} alt='graduation cap icon' className='w-5 h-5 text-secondary-700' />
-                        </div>
-
-                        <h3 className='text-h4 font-bold font-primary text-primary-2000 mb-2'>
-                            1. Select Class
-                        </h3>
-
-                        <p className='text-p3 text-neutral-2000 leading-relaxed'>
-                            Choose your specific level from SS1 to SS3. Our content is
-                            tailored to the Nigerian curriculum standards.
-                        </p>
-                    </div>
-
-                    <div className='bg-neutral-300 rounded-xl p-6'>
-                        <div className='w-10 h-10 bg-secondary-100 rounded-full flex items-center justify-center mb-4'>
-                            <img src= {offline} alt='offline icon' className='w-5 h-5 text-secondary-700' />
-                        </div>
-
-                        <h3 className='text-h4 font-bold font-primary text-primary-2000 mb-2'>
-                            2. Learn Offline
-                        </h3>
-
-                        <p className='text-p3 text-neutral-2000 leading-relaxed'>
-                            Download lessons once and access them anytime. Our lightweight
-                            text-based format saves your data.
-                        </p>
-                    </div>
-
-                    <div className='bg-neutral-300 rounded-xl p-6'>
-                        <div className='w-10 h-10 bg-secondary-100 rounded-full flex items-center justify-center mb-4'>
-                            <img src= {Vector} alt='vector icon' className='w-5 h-5 text-secondary-700' />
-                        </div>
-
-                        <h3 className='text-h4 font-bold font-primary text-primary-2000 mb-2'>
-                            3. Practice & Improve
-                        </h3>
-
-                        <p className='text-p3 text-neutral-2000 leading-relaxed'>
-                            Take instant quizzes after each module to test your knowledge
-                            and track your academic progress.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        {/*SUSTAINABLE FUTURE */}
-        <section className="bg-primary-800 py-20 px-4 md:px-10 text-neutral-50 font-secondary">
-            <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div>
-                <h2 className="text-display3 md:text-4xl font-primary">
-                    Building a Sustainable Future
-                </h2>
-
-                <p className="mt-2 text-p3 text-primary-50 max-w-lg leading-relaxed">
-                Education Bridge is committed to the United Nations
-                Sustainable Development Goals. We believe that
-                quality education should be accessible to everyone,
-                everywhere, regardless of internet connectivity.
-                </p>
-
-                <button className="mt-4 text-sm inline-flex items-center gap-2 text-neutral-50 font-semibold hover:gap-3 transition-all">
-                    Read our Impact Report
-                    <ArrowRight size={16} />
-                </button>
-                </div>
-
-                <div className="grid sm:grid-cols-2 gap-6">
-                    <div className="bg-primary-700 rounded-2xl p-8 text-center backdrop-blur-md">
-                        <div className="w-18 h-18 rounded-xl flex items-center justify-center mx-auto">
-                            <img src={QualityEducation} alt="Quality Education Icon" />
-                        </div>
-
-                        <h4 className="font-semibold text-lg">
-                            Quality Education
-                        </h4>
-
-                        <p className=" text-primary-100 text-sm">
-                            Ensuring inclusive and equitable learning.
-                        </p>
-                    </div>
-
-                    <div className="bg-primary-700 rounded-xl p-8 text-center">
-                        <div className="w-18 h-18 rounded-lg flex items-center justify-center mx-auto">
-                            <img src={partnership} alt="partnership Icon"/>
-                        </div>
-
-                        <h4 className="text-h3 font-primary">
-                        Partnerships
-                        </h4>
-
-                        <p className="text-sm text-primary-100">
-                            Collaborating for greater impact.
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-
-
-        <section className="py-20 px-6 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center font-secondary">
-            <div className="relative rounded-xl overflow-hidden shadow-lg h-[382px]">
-                <img 
-                    src={map}
-                    alt="Map of Africa" 
-                    className="w-full h-full object-cover"
+          <div className='mt-12 grid gap-6 md:grid-cols-3 text-left'>
+            <div className='bg-neutral-300 rounded-xl p-6'>
+              <div className='w-10 h-10 bg-secondary-100 rounded-full flex items-center justify-center mb-4'>
+                <img
+                  src={grad}
+                  alt='graduation cap icon'
+                  className='w-5 h-5 text-secondary-700'
                 />
-                <MapPin className="text-secondary-700 fill-secondary-700" size={20} />
-                <div className="absolute bottom-8 left-8 text-white">
-                    <div className="flex items-center gap-2 mb-2">
-                        <MapPin className="text-secondary-700 fill-secondary-700" size={20} />
-                        {/* <span className="font-bold text-h4 tracking-wider uppercase">Serving Nigeria</span> */}
-                    </div>
-                    {/* <p className="text-p3 max-w-[280px] opacity-90">
+              </div>
+
+              <h3 className='text-h4 font-bold font-primary text-primary-2000 mb-2'>
+                1. Select Class
+              </h3>
+
+              <p className='text-p3 text-neutral-2000 leading-relaxed'>
+                Choose your specific level from SS1 to SS3. Our content is
+                tailored to the Nigerian curriculum standards.
+              </p>
+            </div>
+
+            <div className='bg-neutral-300 rounded-xl p-6'>
+              <div className='w-10 h-10 bg-secondary-100 rounded-full flex items-center justify-center mb-4'>
+                <img
+                  src={offline}
+                  alt='offline icon'
+                  className='w-5 h-5 text-secondary-700'
+                />
+              </div>
+
+              <h3 className='text-h4 font-bold font-primary text-primary-2000 mb-2'>
+                2. Learn Offline
+              </h3>
+
+              <p className='text-p3 text-neutral-2000 leading-relaxed'>
+                Download lessons once and access them anytime. Our lightweight
+                text-based format saves your data.
+              </p>
+            </div>
+
+            <div className='bg-neutral-300 rounded-xl p-6'>
+              <div className='w-10 h-10 bg-secondary-100 rounded-full flex items-center justify-center mb-4'>
+                <img
+                  src={Vector}
+                  alt='vector icon'
+                  className='w-5 h-5 text-secondary-700'
+                />
+              </div>
+
+              <h3 className='text-h4 font-bold font-primary text-primary-2000 mb-2'>
+                3. Practice & Improve
+              </h3>
+
+              <p className='text-p3 text-neutral-2000 leading-relaxed'>
+                Take instant quizzes after each module to test your knowledge
+                and track your academic progress.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/*SUSTAINABLE FUTURE */}
+      <section className='bg-primary-800 py-20 px-4 md:px-10 text-neutral-50 font-secondary'>
+        <div className='max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center'>
+          <div>
+            <h2 className='text-display3 md:text-4xl font-primary'>
+              Building a Sustainable Future
+            </h2>
+
+            <p className='mt-2 text-p3 text-primary-50 max-w-lg leading-relaxed'>
+              Education Bridge is committed to the United Nations Sustainable
+              Development Goals. We believe that quality education should be
+              accessible to everyone, everywhere, regardless of internet
+              connectivity.
+            </p>
+
+            <button className='mt-4 text-sm inline-flex items-center gap-2 text-neutral-50 font-semibold hover:gap-3 transition-all'>
+              Read our Impact Report
+              <ArrowRight size={16} />
+            </button>
+          </div>
+
+          <div className='grid sm:grid-cols-2 gap-6'>
+            <div className='bg-primary-700 rounded-2xl p-8 text-center backdrop-blur-md'>
+              <div className='w-18 h-18 rounded-xl flex items-center justify-center mx-auto'>
+                <img src={QualityEducation} alt='Quality Education Icon' />
+              </div>
+
+              <h4 className='font-semibold text-lg'>Quality Education</h4>
+
+              <p className=' text-primary-100 text-sm'>
+                Ensuring inclusive and equitable learning.
+              </p>
+            </div>
+
+            <div className='bg-primary-700 rounded-xl p-8 text-center'>
+              <div className='w-18 h-18 rounded-lg flex items-center justify-center mx-auto'>
+                <img src={partnership} alt='partnership Icon' />
+              </div>
+
+              <h4 className='text-h3 font-primary'>Partnerships</h4>
+
+              <p className='text-sm text-primary-100'>
+                Collaborating for greater impact.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className='py-20 px-6 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center font-secondary'>
+        <div className='relative rounded-xl overflow-hidden shadow-lg h-[382px]'>
+          <img
+            src={map}
+            alt='Map of Africa'
+            className='w-full h-full object-cover'
+          />
+          <MapPin className='text-secondary-700 fill-secondary-700' size={20} />
+          <div className='absolute bottom-8 left-8 text-white'>
+            <div className='flex items-center gap-2 mb-2'>
+              <MapPin
+                className='text-secondary-700 fill-secondary-700'
+                size={20}
+              />
+              {/* <span className="font-bold text-h4 tracking-wider uppercase">Serving Nigeria</span> */}
+            </div>
+            {/* <p className="text-p3 max-w-[280px] opacity-90">
                         From Lagos to Maiduguri, we are connecting students to knowledge.
                     </p> */}
-                </div>
+          </div>
+        </div>
+
+        <div className='space-y-10'>
+          <h2 className='text-h1 font-bold text-primary-3000 leading-tight'>
+            Designed For Nigeria Realities
+          </h2>
+
+          <div className='space-y-8'>
+            <div className='flex gap-4'>
+              <div className='flex-shrink-0 w-12 h-12 rounded-full bg-secondary-100 flex items-center justify-center'>
+                <WifiOff className='text-secondary-700' size={24} />
+              </div>
+              <div>
+                <h3 className='text-h3 font-bold text-primary-3000 mb-1'>
+                  Low Bandwidth Optimization
+                </h3>
+                <p className='text-p3 text-neutral-3000 leading-relaxed'>
+                  Our platform works seamlessly on 2G and 3G networks, ensuring
+                  no student is left behind due to poor connectivity.
+                </p>
+              </div>
             </div>
 
-            <div className="space-y-10">
-                <h2 className="text-h1 font-bold text-primary-3000 leading-tight">
-                    Designed For Nigeria Realities
-                </h2>
-
-                <div className="space-y-8">
-                    <div className="flex gap-4">
-                        <div className="flex-shrink-0 w-12 h-12 rounded-full bg-secondary-100 flex items-center justify-center">
-                            <WifiOff className="text-secondary-700" size={24} />
-                        </div>
-                        <div>
-                            <h3 className="text-h3 font-bold text-primary-3000 mb-1">Low Bandwidth Optimization</h3>
-                            <p className="text-p3 text-neutral-3000 leading-relaxed">
-                                Our platform works seamlessly on 2G and 3G networks, ensuring no student is left behind due to poor connectivity.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div className="flex gap-4">
-                        <div className="flex-shrink-0 w-12 h-12 rounded-full bg-secondary-100 flex items-center justify-center">
-                            <Smartphone className="text-secondary-700" size={24} />
-                        </div>
-                        <div>
-                            <h3 className="text-h3 font-bold text-primary-3000 mb-1">Device Agnostic</h3>
-                            <p className="text-p3 text-neutral-3000 leading-relaxed">
-                                Whether on a desktop, a smartphone, or a basic feature phone, Education Bridge adapts to the device at hand.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div className='flex gap-4'>
+              <div className='flex-shrink-0 w-12 h-12 rounded-full bg-secondary-100 flex items-center justify-center'>
+                <Smartphone className='text-secondary-700' size={24} />
+              </div>
+              <div>
+                <h3 className='text-h3 font-bold text-primary-3000 mb-1'>
+                  Device Agnostic
+                </h3>
+                <p className='text-p3 text-neutral-3000 leading-relaxed'>
+                  Whether on a desktop, a smartphone, or a basic feature phone,
+                  Education Bridge adapts to the device at hand.
+                </p>
+              </div>
             </div>
-    </section>
+          </div>
+        </div>
+      </section>
     </>
   );
 };
