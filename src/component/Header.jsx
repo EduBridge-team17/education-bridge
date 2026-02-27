@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import NavBar from './NavBar'
+
 const Header = () => {
   return (
     <>
@@ -10,6 +11,7 @@ const Header = () => {
         </div>
         <NavBar />
     </header>
+    
     </>
     
   )

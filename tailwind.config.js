@@ -7,8 +7,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        primary: ['Euclid Circular B', 'sans-serif'], //mobile
-        secondary: ['Helvetica Neue', 'sans-serif'], //desktop
+        // primary: ['Euclid Circular B', 'sans-serif'], //mobile
+        // secondary: ['Helvetica Neue', 'sans-serif'], //desktop
+        sans: ['Inter', 'sans-serif'],
+       primary: ['Inter', 'sans-serif'],
       },
       colors: {
         primary: {
