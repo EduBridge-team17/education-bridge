@@ -1,25 +1,24 @@
-import { useState } from 'react'
-import './index.css'
-import { Route, Routes } from 'react-router-dom'
-import NavBar from './component/NavBar'
-import Home from './pages/Home'
-import Login from './pages/auth/login'
-import SignUp from './pages/auth/SignUp'
-import Header from './component/Header'
+import { useState } from 'react';
+import './index.css';
+import { Route, Routes } from 'react-router-dom';
+import NavBar from './component/NavBar';
+import Home from './pages/Home';
+import Login from './pages/auth/login';
+import SignUp from './pages/auth/SignUp';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
-      <Header />
+      {/* <NavBar /> */}
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<SignUp />} />
       </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -95,8 +95,6 @@ education-bridge/
 
 ## 📄 License
 
-
-
 ---
 
 ## 📧 Support
