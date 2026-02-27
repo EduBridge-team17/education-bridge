@@ -86,7 +86,6 @@ const Login = () => {
             <p className='text-sm text-neutral-3000 mb-6'>Start your learning journey today.</p>
 
             <form className='space-y-4' onSubmit={handleLogin}>
-              {/* Email Input */}
               <div>
                 <label className='block text-[12px] font-bold text-primary-900 mb-1'>Phone Number or Email</label>
                 <div className='relative'>

@@ -1,207 +1,211 @@
 import React, { useState } from 'react';
-import { User, Smartphone, Lock, Eye, EyeOff, GraduationCap } from 'lucide-react';
-import Button from '../../component/Button';
+import { User, Mail, Smartphone, Lock, Eye, EyeOff, GraduationCap } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import SuccessModal from '../../component/Modal';
+import Button from '../../component/Button';
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const [role, setRole] = useState('student'); 
+
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSuccessOpen, setIsSuccessOpen] = useState(false);
 
   const [formData, setFormData] = useState({
+    role: '',
     fullName: '',
-    identifier: '', 
-    password: '',
-    schoolName: '',
-    roleTitle: '',
-    subjectsTaught: '',
-    schoolEmail: '',
-    teachingLevel: '',
-    agreeToTerms: false
+    email: '',
+    phone: '',
+    password: ''
   });
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: value
     }));
   };
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    if (!formData.agreeToTerms) {
-      alert("Please agree to the Terms and Conditions");
-      return;
-    }
     setIsLoading(true);
-
-    const payload = {
-      role: role,
-      name: formData.fullName,
-      password: formData.password,
-      ...(role === 'student' 
-        ? { email: formData.identifier } 
-        : { 
-            email: formData.schoolEmail, 
-            school: formData.schoolName,
-            role_title: formData.roleTitle,
-            subjects: formData.subjectsTaught,
-            level: formData.teachingLevel
-          })
-    };
 
     try {
       const response = await fetch('http://localhost:5000/api/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
       if (response.ok) {
-        alert("Account created! Redirecting to login...");
-        navigate('/login');
-      } else {
-        alert(data.message || "Signup failed");
+        setIsSuccessOpen(true);
       }
+
     } catch (error) {
-      alert("Server error. Please check your connection.");
+      console.error("Signup error:", error);
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className='min-h-screen w-full bg-neutral-100 flex items-center justify-center p-4 font-secondary'>
-      <div className='w-full max-w-[850px] flex flex-col lg:flex-row bg-white rounded-2xl overflow-hidden shadow-2xl border border-neutral-200'>
-      
-        <div className='hidden lg:flex lg:w-[50%] bg-primary-800 p-8 flex-col justify-between relative overflow-hidden'>
-          <div className='z-10'>
-            <div className='flex items-center gap-2 mb-6'>
-              <div className='bg-neutral-400 p-1 rounded-full'>
-                <GraduationCap className='text-primary-900' size={14} />
-              </div>
-              <span className='text-white font-bold text-[12px]'>Education Bridge</span>
-            </div>
-            <h1 className='text-h1 font-bold text-white leading-tight mb-3'>
-              Empowering Rural Education Across Nigeria.
-            </h1>
-            <p className='text-p3 text-neutral-800 max-w-[240px] leading-relaxed opacity-90'>
-              Join thousands of SS1-SS3 students and teachers bridging the digital divide with offline-first learning tools.
-            </p>
-          </div>
-          <div className='z-10 pt-10'>
-            <div className='flex -space-x-2 mb-2'>
-              {[1, 2, 3].map((i) => (
-                <div key={i} className='w-10 h-10 rounded-full border-2 border-primary-800 bg-neutral-600' />
-              ))}
-              <div className='w-10 h-10 rounded-full border-2 border-primary-800 bg-white flex items-center justify-center text-[8px] font-bold text-primary-900'>+2k</div>
-            </div>
-            <p className='text-[10px] text-neutral-800'>Trusted by over 2,000 schools in rural communities.</p>
-          </div>
-        </div>
+    <>
+      <div className='min-h-screen bg-neutral-100 flex items-center justify-center p-4 font-secondary'>
+        <div className='w-full max-w-[850px] flex bg-white rounded-2xl shadow-2xl overflow-hidden'>
 
-        <div className='flex-1 lg:w-[45%] flex flex-col justify-center p-6 lg:p-8 bg-white'>
-          <h2 className='text-h3 font-bold text-primary-900 mb-0.5'>Create Account</h2>
-          <p className='text-sm text-neutral-3000 mb-4'>Start your learning journey today.</p>
-
-          <div className='flex bg-neutral-400 p-0.5 rounded-lg mb-5'>
-            <button
-              type="button"
-              onClick={() => setRole('student')}
-              className={`flex-1 flex items-center justify-center gap-2 py-1.5 text-[12px] transition-all rounded-md ${role === 'student' ? 'bg-white shadow-sm font-bold text-primary-900' : 'text-neutral-1000'}`}
-            >
-              <User size={12} /> Student
-            </button>
-            <button
-              type="button"
-              onClick={() => setRole('teacher')}
-              className={`flex-1 flex items-center justify-center gap-2 py-1.5 text-[12px] transition-all rounded-md ${role === 'teacher' ? 'bg-white shadow-sm font-bold text-primary-900' : 'text-neutral-1000'}`}
-            >
-              <GraduationCap size={12} /> Teacher
-            </button>
-          </div>
-
-          <form className='space-y-3' onSubmit={handleSignUp}>
+          <div className='hidden lg:flex w-1/2 bg-[#1F7A6B] p-10 flex-col justify-between text-white'>
             <div>
-              <label className='block text-[12px] font-bold text-primary-900 mb-0.5'>Full Name</label>
-              <div className='relative'>
-                <User className='absolute left-3 top-1/2 -translate-y-1/2 text-neutral-900' size={14} />
-                <input type='text' name="fullName" required onChange={handleChange} placeholder='e.g. Chinedu Okafor' className='w-full pl-9 pr-4 py-1.5 bg-neutral-300 border-none rounded-md outline-none text-[11px]' />
+              <div className='flex items-center gap-2 mb-6'>
+                <div className='bg-neutral-400 p-1 rounded-full'>
+                  <GraduationCap className='text-primary-900' size={14} />
+               </div>
+                <span className='font-bold'>Education Bridge</span>
               </div>
-            </div>
 
-            {role === 'student' ? (
-              <div>
-                <label className='block text-[12px] font-bold text-primary-900 mb-0.5'>Phone Number or Email</label>
-                <div className='relative'>
-                  <Smartphone className='absolute left-3 top-1/2 -translate-y-1/2 text-neutral-900' size={14} />
-                  <input type='text' name="identifier" required onChange={handleChange} placeholder='+234 80...' className='w-full pl-9 pr-4 py-1.5 bg-neutral-300 border-none rounded-md outline-none text-[11px]' />
-                </div>
-              </div>
-            ) : (
-              <>
-                <div>
-                  <label className='block text-[12px] font-bold text-primary-900 mb-0.5'>School Name</label>
-                  <div className='relative'>
-                    <Smartphone className='absolute left-3 top-1/2 -translate-y-1/2 text-neutral-900' size={14} />
-                    <input type='text' name="schoolName" required onChange={handleChange} className='w-full pl-9 pr-4 py-1.5 bg-neutral-300 border-none rounded-md outline-none text-[11px]' />
-                  </div>
-                </div>
-                <div className='grid grid-cols-2 gap-2'>
-                  <div>
-                    <label className='block text-[12px] font-bold text-primary-900'>Role</label>
-                    <input type='text' name="roleTitle" placeholder="Role" onChange={handleChange} className='w-full px-3 py-1.5 bg-neutral-300 border-none rounded-md outline-none text-[11px]' />
-                  </div>
-                  <div>
-                    <label className='block text-[12px] font-bold text-primary-900'>Subject</label>
-                    <input type='text' name="subjectsTaught" placeholder="Subjects" onChange={handleChange} className='w-full px-3 py-1.5 bg-neutral-300 border-none rounded-md outline-none text-[11px]' />
-                  </div>
-                </div>
-                <div className='grid grid-cols-2 gap-2'>
-                  <div>
-                    <label className='block text-[12px] font-bold text-primary-900'>School Email</label>
-                    <input type='email' name="schoolEmail" placeholder="Email" required onChange={handleChange} className='w-full px-3 py-1.5 bg-neutral-300 border-none rounded-md outline-none text-[11px]' />
-                  </div>
-                  <div>
-                    <label className='block text-[12px] font-bold text-primary-900'>Level</label>
-                    <input type='text' name="teachingLevel" placeholder="Level" onChange={handleChange} className='w-full px-3 py-1.5 bg-neutral-300 border-none rounded-md outline-none text-[11px]' />
-                  </div>
-                </div>
-              </>
-            )}
+              <h1 className='text-3xl font-bold leading-snug mb-4'>
+                Empowering Rural Education Across Nigeria.
+              </h1>
 
-            <div>
-              <label className='block text-[12px] font-bold text-primary-900 mb-0.5'>Password</label>
-              <div className='relative'>
-                <Lock className='absolute left-3 top-1/2 -translate-y-1/2 text-neutral-900' size={14} />
-                <input type={showPassword ? 'text' : 'password'} name="password" required onChange={handleChange} placeholder='........' className='w-full pl-9 pr-9 py-1.5 bg-neutral-300 border-none rounded-md outline-none text-[11px]' />
-                <div className='absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer opacity-60' onClick={() => setShowPassword(!showPassword)}>
-                  {showPassword ? <EyeOff size={14} /> : <Eye size={14} />}
-                </div>
-              </div>
-            </div>
-
-            <div className='flex items-center gap-2 pt-1'>
-              <input type='checkbox' name="agreeToTerms" required onChange={handleChange} className='w-3 h-3 accent-primary-800' />
-              <p className='text-[9px] text-neutral-3000'>
-                I agree to the <span className='text-primary-800 underline font-medium'>Terms</span> and <span className='text-primary-800 underline font-medium'>Privacy Policy</span>
+              <p className='text-sm opacity-90 max-w-[260px]'>
+                Join thousands of SS1-SS3 students and teachers bridging the digital divide with offline-first learning tools.
               </p>
             </div>
 
-            <Button type="submit" disabled={isLoading} className='w-full bg-[#116962] text-white py-2 rounded-lg font-bold text-[12px] shadow-sm mt-1'>
-              {isLoading ? 'Creating Account...' : 'Create Account'}
-            </Button>
+            <div>
+              <div className='flex -space-x-2 mb-3'>
+                {[1, 2, 3].map(i => (
+                  <div key={i} className='w-10 h-10 rounded-full bg-white border-2 border-prmary-600' />
+                ))}
+                <div className='w-10 h-10 rounded-full bg-white text-primary-600 flex items-center justify-center text-xs font-bold'>
+                  +2k
+                </div>
+              </div>
+              <p className='text-xs opacity-80'>
+                Trusted by over 2,000 schools in rural communities.
+              </p>
+            </div>
+          </div>
 
-            <p className='text-center text-[10px] text-neutral-3000 mt-2'>
-              Already have an account? <span onClick={() => navigate('/login')} className='text-primary-800 font-bold cursor-pointer hover:underline'>Log in</span>
-            </p>
-          </form>
+          <div className='flex-1 p-8'>
+            <h2 className='text-2xl font-bold text-gray-800'>Create account</h2>
+            <p className='text-sm text-gray-500 mb-6'>Choose your role to continue</p>
+
+            <form onSubmit={handleSignUp} className='space-y-4'>
+
+              <div>
+                <label className='text-sm font-medium'>I am signing up as</label>
+                <select
+                  name="role"
+                  required
+                  onChange={handleChange}
+                  className='w-full mt-1 px-4 py-3 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1F7A6B]'
+                >
+                  <option value="">Select Role</option>
+                  <option value="student">Student</option>
+                  <option value="teacher">Teacher</option>
+                </select>
+              </div>
+
+              <div className='relative'>
+                <User size={16} className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-400' />
+                <input
+                  type="text"
+                  name="fullName"
+                  required
+                  placeholder="Full Name"
+                  onChange={handleChange}
+                  className='w-full pl-10 pr-4 py-3 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1F7A6B]'
+                />
+              </div>
+
+              <div className='relative'>
+                <Mail size={16} className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-400' />
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="you@example.com"
+                  onChange={handleChange}
+                  className='w-full pl-10 pr-4 py-3 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1F7A6B]'
+                />
+              </div>
+
+              <div className='relative'>
+                <Smartphone size={16} className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-400' />
+                <input
+                  type="text"
+                  name="phone"
+                  placeholder="+234 80..."
+                  onChange={handleChange}
+                  className='w-full pl-10 pr-4 py-3 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1F7A6B]'
+                />
+              </div>
+
+              <div className='relative'>
+                <Lock size={16} className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-400' />
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  required
+                  placeholder="********"
+                  onChange={handleChange}
+                  className='w-full pl-10 pr-10 py-3 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1F7A6B]'
+                />
+                <div
+                  onClick={() => setShowPassword(!showPassword)}
+                  className='absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-400'
+                >
+                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                </div>
+              </div>
+
+              <Button
+                type="submit"
+                disabled={isLoading}
+                className='w-full bg-[#1F7A6B] text-white py-3 rounded-lg font-semibold'
+              >
+                {isLoading ? 'Creating Account...' : 'Create Account →'}
+              </Button>
+
+              <div className='flex items-center gap-3 text-xs text-gray-400'>
+                <div className='flex-1 h-px bg-gray-200'></div>
+                OR CONTINUE WITH EMAIL
+                <div className='flex-1 h-px bg-gray-200'></div>
+              </div>
+
+        
+              <button
+                type="button"
+                className='w-full border py-3 rounded-lg text-sm font-medium hover:bg-gray-50'
+              >
+                Continue with Google
+              </button>
+
+              <p className='text-center text-sm text-gray-500'>
+                Already have an account?
+                <span
+                  onClick={() => navigate('/login')}
+                  className='text-[#1F7A6B] font-semibold cursor-pointer ml-1'
+                >
+                  Log in
+                </span>
+              </p>
+
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+
+      <SuccessModal
+        isOpen={isSuccessOpen}
+        onClose={() => setIsSuccessOpen(false)}
+        title="Account Created Successfully!"
+        message="Your account has been created successfully. You can now log in."
+        buttonText="Continue to Login"
+        onConfirm={() => navigate('/login')}
+      />
+    </>
   );
 };
 
