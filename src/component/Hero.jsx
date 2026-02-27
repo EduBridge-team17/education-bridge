@@ -9,7 +9,7 @@ import {
 
 import Button from './Button';
 import student from '../assets/images/student.jpg';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const Hero = () => {
   return (
@@ -38,7 +38,9 @@ const Hero = () => {
               size='lg'
               className='flex items-center justify-center gap-2 rounded-lg text-p3'
             >
-              Get Started
+              <NavLink to='/signup'>
+                Get Started 
+              </NavLink>
               <ArrowRight size={18} />
             </Button>
 

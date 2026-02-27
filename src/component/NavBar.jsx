@@ -11,8 +11,7 @@ const Navbar = () => {
       ? 'text-orange-500 font-semibold'
       : 'text-neutral-3000 hover:text-primary-700 transition';
 
-    const baseNav =
-      'text-neutral-3000 hover:text-primary-700 transition';
+  const baseNav = 'text-neutral-3000 hover:text-primary-700 transition';
   return (
     <nav className='w-full px-4 md:px-10 py-6'>
       <div className='max-w-7xl mx-auto flex items-center justify-between'>
@@ -36,13 +35,13 @@ const Navbar = () => {
           <NavLink to='/' className={navLinkClass}>
             Home
           </NavLink>
-          <a href="#about" className={baseNav}>
+          <a href='#about' className={baseNav}>
             About
           </a>
           <NavLink to='/partnerships' className={navLinkClass}>
             Partnerships
           </NavLink>
-          <a href="#contact" className={baseNav}>
+          <a href='#contact' className={baseNav}>
             Contact
           </a>
         </div>
