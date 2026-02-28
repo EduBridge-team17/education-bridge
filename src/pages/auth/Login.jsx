@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { supabase } from "../supabaseClient";
+import { useNavigate } from "react-router-dom";
 import {
   User,
   Mail,
@@ -10,11 +12,13 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const navigate = useNavigate();
-
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
+  const [email, setEmail] = useState(""); 
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -22,7 +26,7 @@ const Login = () => {
     password: "",
   });
 
-  // ✅ Fixed handleChange
+  // Fixed handleChange
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -31,7 +35,7 @@ const Login = () => {
     }));
   };
 
-  // ✅ Fixed login (single fetch, no duplicates)
+  // Fixed login (single fetch, no duplicates)
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -39,7 +43,7 @@ const Login = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/auth/login",
+        "https://edu-bridge-backend-z68e.onrender.com/api/auth/login",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
