@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, GraduationCap, Smartphone } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../component/Button';
 import SuccessModal from '../../component/Modal';
