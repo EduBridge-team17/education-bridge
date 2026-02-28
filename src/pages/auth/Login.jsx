@@ -9,7 +9,6 @@ import {
   EyeOff,
   GraduationCap,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
