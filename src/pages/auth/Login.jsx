@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Smartphone, Lock, Eye, EyeOff, GraduationCap } from 'lucide-react';
+import { Smartphone, Lock, Eye, EyeOff, GraduationCap, ArrowRight } from 'lucide-react';
 import Button from '../../component/Button';
 import { useNavigate } from 'react-router-dom';
 
@@ -87,7 +87,7 @@ const Login = () => {
 
             <form className='space-y-4' onSubmit={handleLogin}>
               <div>
-                <label className='block text-[12px] font-bold text-primary-900 mb-1'>Phone Number or Email</label>
+                <label className='block text-[12px] font-bold text-primary-900 mb-1'> Email Address</label>
                 <div className='relative'>
                   <Smartphone className='absolute left-3 top-1/2 -translate-y-1/2 text-neutral-900' size={14} />
                   <input
@@ -95,7 +95,7 @@ const Login = () => {
                     name="email"
                     required
                     onChange={handleChange}
-                    placeholder='+234 80...'
+                    placeholder='you@example.com'
                     className='w-full pl-9 pr-4 py-2 bg-neutral-300 border-none rounded-md outline-none text-[11px] focus:ring-1 focus:ring-primary-800'
                   />
                 </div>
@@ -128,7 +128,8 @@ const Login = () => {
                 disabled={isLoading}
                 className='w-full bg-[#116962] text-white py-2.5 rounded-lg font-bold text-[12px] shadow-sm mt-4'
               >
-                {isLoading ? 'Verifying...' : 'Log in'}
+                {isLoading ? 'Verifying...' : 'Log in →'}
+    
               </Button>
 
               <p className='text-center text-[10px] text-neutral-3000 mt-4'>
