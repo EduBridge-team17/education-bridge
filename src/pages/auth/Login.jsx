@@ -1,28 +1,20 @@
 import React, { useState } from 'react';
-import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Smartphone, Lock, Eye, EyeOff, GraduationCap, ArrowRight } from 'lucide-react';
 import Button from '../../component/Button';
-import SuccessModal from '../../component/Modal';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const navigate = useNavigate();
-
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isSuccessOpen, setIsSuccessOpen] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-
+  
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleLogin = async (e) => {
@@ -40,16 +32,14 @@ const Login = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // Optionally save token or user info
-        localStorage.setItem('token', data.token);
-        setIsSuccessOpen(true);
+     
+        localStorage.setItem('supabase_token', data.session.access_token);
+        navigate('/dashboard'); 
       } else {
-        setErrorMessage(data.message || 'Invalid credentials');
+        alert(data.message || "Login failed. Please check your credentials.");
       }
-
     } catch (error) {
-      console.error("Login error:", error);
-      setErrorMessage('Something went wrong. Please try again.');
+      alert("Cannot connect to server. Ensure your backend is running on port 5000.");
     } finally {
       setIsLoading(false);
     }
