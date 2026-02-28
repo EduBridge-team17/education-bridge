@@ -7,8 +7,6 @@ import SignUp from './pages/auth/SignUp';
 import Login from './pages/auth/Login';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <Routes>

@@ -12,7 +12,7 @@ const Home = () => {
       <HowItWorks />
       <ResourcesPage />
       <Footer />
-
+      
     </>
   );
 };
