@@ -32,18 +32,25 @@ const SignUp = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('https://edu-bridge-backend-z68e.onrender.com/api/auth/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+      const { data, error } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            fullName: formData.fullName,
+            role: formData.role,
+            phone: formData.phone,
+          },
+        },
       });
 
-      if (response.ok) {
+      if (error) {
+        console.error(error.message);
+      } else {
         setIsSuccessOpen(true);
       }
-
-    } catch (error) {
-      console.error("Signup error:", error);
+    } catch (err) {
+      console.error(err);
     } finally {
       setIsLoading(false);
     }

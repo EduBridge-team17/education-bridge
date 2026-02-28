@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../../supabaseClient";
 import { useNavigate } from "react-router-dom";
 import {
   User,
@@ -41,25 +41,18 @@ const Login = () => {
     setErrorMessage("");
 
     try {
-      const response = await fetch(
-        "https://edu-bridge-backend-z68e.onrender.com/api/auth/login",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        }
-      );
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: formData.email,
+        password: formData.password,
+      });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        localStorage.setItem("token", data.token);
-        navigate("/dashboard");
+      if (error) {
+        setErrorMessage(error.message);
       } else {
-        setErrorMessage(data.message || "Invalid credentials");
+        localStorage.setItem("token", data.session.access_token);
+        navigate("/dashboard");
       }
-    } catch (error) {
-      console.error("Login error:", error);
+    } catch (err) {
       setErrorMessage("Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);
