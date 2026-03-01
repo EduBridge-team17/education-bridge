@@ -2,169 +2,212 @@ import {
   Handshake,
   GraduationCap,
   Building2,
+  CheckCircle2,
+  ArrowRight,
   WifiOff,
   BarChart3,
   Globe,
 } from "lucide-react";
 
-import classP from "../assets/images/classP.png";
 import pupils from "../assets/images/pupils.png";
+import classP from "../assets/images/classP.png";
 
-const Partnership = () => {
+
+const Partnership= () => {
   return (
-    <section className="py-20 px-4 md:px-10 bg-neutral-300 font-secondary">
-      <div className="max-w-7xl mx-auto space-y-20">
+    <section id ='partnership' className="bg-neutral-200 py-24 px-4 md:px-8">
+      <div className="max-w-6xl mx-auto space-y-28">
 
-        {/* ================= HEADER ================= */}
-        <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-h1 font-primary font-bold text-primary-2000">
-            How We Can Work Together
-          </h2>
+        <div>
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <h2 className="text-2xl md:text-3xl font-bold text-primary-2000">
+              How We Can Work Together
+            </h2>
+            <p className="mt-3 text-sm md:text-base text-neutral-2000">
+              Whether you're an educational institution, a non-profit, or a
+              corporation, there's a place for you in our ecosystem.
+            </p>
+          </div>
 
-          <p className="mt-3 text-p3 text-neutral-2000">
-            Whether you're an institution, NGO, or corporate organization,
-            Education Bridge provides flexible partnership models that scale impact.
-          </p>
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+
+           
+            <div className="bg-neutral-100 rounded-2xl p-8 shadow-sm flex flex-col">
+              <Handshake className="text-blue-600 mb-5" size={26} />
+
+              <h3 className="text-lg font-semibold text-primary-2000 mb-3">
+                NGOs & Non-Profits
+              </h3>
+
+              <p className="text-sm text-neutral-2000 leading-relaxed mb-6">
+                Amplify your impact in rural communities using our scalable
+                digital education infrastructure.
+              </p>
+
+              <div className="space-y-3 mb-6">
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="text-orange-500 mt-0.5" />
+                  <span className="text-sm text-neutral-2000">
+                    Scalable content distribution
+                  </span>
+                </div>
+
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="text-orange-500 mt-0.5" />
+                  <span className="text-sm text-neutral-2000">
+                    Impact measurement tools
+                  </span>
+                </div>
+              </div>
+
+              <div className="mt-auto flex items-center gap-1 text-orange-500 text-sm font-medium cursor-pointer">
+                Partner as NGO
+                <ArrowRight size={14} />
+              </div>
+            </div>
+
+            <div className="bg-neutral-100 rounded-2xl p-8 shadow-sm flex flex-col">
+              <GraduationCap className="text-orange-600 mb-5" size={26} />
+
+              <h3 className="text-lg font-semibold text-primary-2000 mb-3">
+                Schools
+              </h3>
+
+              <p className="text-sm text-neutral-2000 leading-relaxed mb-6">
+                Digitize your curriculum without internet dependency and empower
+                students with modern learning tools.
+              </p>
+
+              <div className="space-y-3 mb-6">
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="text-orange-500 mt-0.5" />
+                  <span className="text-sm text-neutral-2000">
+                    Offline-first digital library
+                  </span>
+                </div>
+
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="text-orange-500 mt-0.5" />
+                  <span className="text-sm text-neutral-2000">
+                    Teacher training modules
+                  </span>
+                </div>
+              </div>
+
+              <div className="mt-auto flex items-center gap-1 text-orange-500 text-sm font-medium cursor-pointer">
+                Equip Your School
+                <ArrowRight size={14} />
+              </div>
+            </div>
+            <div className="bg-neutral-100 rounded-2xl p-8 shadow-sm flex flex-col">
+              <Building2 className="text-green-600 mb-5" size={26} />
+
+              <h3 className="text-lg font-semibold text-primary-2000 mb-3">
+                CSR Partners
+              </h3>
+
+              <p className="text-sm text-neutral-2000 leading-relaxed mb-6">
+                Meet sustainability goals while sponsoring measurable
+                educational impact across communities.
+              </p>
+
+              <div className="space-y-3 mb-6">
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="text-orange-500 mt-0.5" />
+                  <span className="text-sm text-neutral-2000">
+                    Detailed impact reporting
+                  </span>
+                </div>
+
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="text-orange-500 mt-0.5" />
+                  <span className="text-sm text-neutral-2000">
+                    Brand visibility in communities
+                  </span>
+                </div>
+              </div>
+
+              <div className="mt-auto flex items-center gap-1 text-orange-500 text-sm font-medium cursor-pointer">
+                Sponsor Change
+                <ArrowRight size={14} />
+              </div>
+            </div>
+
+          </div>
         </div>
 
-        {/* ================= TOP CARDS ================= */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-
-          {/* NGOs */}
-          <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition">
-            <div className="w-10 h-10 bg-secondary-100 rounded-full flex items-center justify-center mb-4">
-              <Handshake className="text-secondary-700" size={20} />
-            </div>
-
-            <h3 className="text-h4 font-bold font-primary text-primary-2000 mb-2">
-              NGOs & Non-Profits
-            </h3>
-
-            <p className="text-p3 text-neutral-2000 leading-relaxed">
-              Deliver educational content to underserved communities with measurable impact reporting.
-            </p>
-          </div>
-
-          {/* Schools */}
-          <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition">
-            <div className="w-10 h-10 bg-secondary-100 rounded-full flex items-center justify-center mb-4">
-              <GraduationCap className="text-secondary-700" size={20} />
-            </div>
-
-            <h3 className="text-h4 font-bold font-primary text-primary-2000 mb-2">
-              Schools
-            </h3>
-
-            <p className="text-p3 text-neutral-2000 leading-relaxed">
-              Digitize your curriculum and empower teachers with offline-first learning tools.
-            </p>
-          </div>
-
-          {/* CSR */}
-          <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition">
-            <div className="w-10 h-10 bg-secondary-100 rounded-full flex items-center justify-center mb-4">
-              <Building2 className="text-secondary-700" size={20} />
-            </div>
-
-            <h3 className="text-h4 font-bold font-primary text-primary-2000 mb-2">
-              CSR Partners
-            </h3>
-
-            <p className="text-p3 text-neutral-2000 leading-relaxed">
-              Sponsor schools and track real-time data on student performance and engagement.
-            </p>
-          </div>
-        </div>
-
-        {/* ================= WHY CHOOSE SECTION ================= */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-
-          {/* -------- LEFT SIDE: IMAGE COLLAGE -------- */}
-          <div className="relative w-full max-w-[520px] mx-auto lg:mx-0 pb-16 lg:pb-0">
-
-            {/* Large Image */}
-            <img
-              src={classP}
-              alt="classroom"
-              className="w-[85%] rounded-2xl shadow-lg object-cover"
-            />
-
-            {/* Small Overlapping Image */}
+       
+        {/* WHY CHOOSE US */}
+        <div className="grid lg:grid-cols-2 gap-14 items-center">
+         
+          <div className="space-y-6">
             <img
               src={pupils}
-              alt="pupils"
-              className="w-[70%] rounded-2xl shadow-lg object-cover 
-                         absolute bottom-0 right-0 translate-y-1/2 
-                         border-4 border-white"
+              alt="Education technology"
+              className="rounded-2xl object-cover w-full h-64 md:h-80"
             />
 
-            {/* Orange Floating Card */}
-            <div className="absolute -top-6 right-[10%] 
-                            bg-orange-500 text-white 
-                            rounded-xl px-6 py-5 
-                            shadow-xl w-[160px]">
-              <p className="text-2xl font-bold">30%</p>
-              <p className="text-xs mt-1 leading-snug">
-                Average improvement in student test scores
-              </p>
-            </div>
+            <div className="grid grid-cols-2 gap-6">
+              <img
+                src={classP}
+                alt="Students learning"
+                className="rounded-2xl object-cover h-40 w-full"
+              />
 
+              <div className="bg-secondary-700 text-white rounded-2xl flex flex-col items-center justify-center p-6 text-center">
+                <p className="text-3xl font-bold">30%</p>
+                <p className="text-sm mt-2">
+                  Improvement in test scores within 6 months
+                </p>
+              </div>
+            </div>
           </div>
 
-          {/* -------- RIGHT SIDE: TEXT CONTENT -------- */}
           <div>
-            <h2 className="text-h1 font-primary font-bold text-primary-2000">
-              Why Choose Education Bridge
+            <h2 className="text-2xl md:text-3xl font-bold text-primary-2000">
+              Why Choose Us
             </h2>
 
-            <p className="mt-3 text-p3 text-neutral-2000 leading-relaxed">
-              Built specifically for Nigerian realities, our platform ensures
-              learning continues regardless of internet access or device limitations.
+            <p className="mt-4 text-sm md:text-base text-neutral-2000 leading-relaxed">
+              We provide a complete ecosystem built for low-connectivity
+              environments. Our infrastructure ensures access, measurement, and
+              long-term impact.
             </p>
 
-            <div className="mt-8 space-y-6">
+            <div className="mt-10 space-y-8">
 
-              {/* Offline */}
               <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-full bg-secondary-100 flex items-center justify-center">
-                  <WifiOff className="text-secondary-700" size={18} />
-                </div>
+                <WifiOff className="text-secondary-700 mt-1" size={22} />
                 <div>
-                  <h4 className="text-h4 font-bold font-primary text-primary-2000">
+                  <h4 className="font-semibold text-primary-2000">
                     Truly Offline
                   </h4>
-                  <p className="text-p3 text-neutral-2000 leading-relaxed">
-                    Access lessons without continuous internet connectivity.
+                  <p className="text-sm text-neutral-2000">
+                    Learn uninterrupted without internet connectivity.
                   </p>
                 </div>
               </div>
 
-              {/* Insights */}
               <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-full bg-secondary-100 flex items-center justify-center">
-                  <BarChart3 className="text-secondary-700" size={18} />
-                </div>
+                <BarChart3 className="text-secondary-700 mt-1" size={22} />
                 <div>
-                  <h4 className="text-h4 font-bold font-primary text-primary-2000">
-                    Data-Driven Insights
+                  <h4 className="font-semibold text-primary-2000">
+                    Data-Driven Impact
                   </h4>
-                  <p className="text-p3 text-neutral-2000 leading-relaxed">
-                    Monitor student performance and track measurable academic improvement.
+                  <p className="text-sm text-neutral-2000">
+                    Track performance and engagement in real time.
                   </p>
                 </div>
               </div>
 
-              {/* Localized */}
               <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-full bg-secondary-100 flex items-center justify-center">
-                  <Globe className="text-secondary-700" size={18} />
-                </div>
+                <Globe className="text-secondary-700 mt-1" size={22} />
                 <div>
-                  <h4 className="text-h4 font-bold font-primary text-primary-2000">
-                    Localized Content
+                  <h4 className="font-semibold text-primary-2000">
+                    Localized Curriculum
                   </h4>
-                  <p className="text-p3 text-neutral-2000 leading-relaxed">
-                    Curriculum aligned with Nigerian academic standards.
+                  <p className="text-sm text-neutral-2000">
+                    Content aligned with national standards and local context.
                   </p>
                 </div>
               </div>
