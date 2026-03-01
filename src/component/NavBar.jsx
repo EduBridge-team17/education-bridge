@@ -38,9 +38,9 @@ const Navbar = () => {
           <a href='#about' className={baseNav}>
             About
           </a>
-          <NavLink to='/partnerships' className={navLinkClass}>
+          <a href='#partnership' className={baseNav}>
             Partnerships
-          </NavLink>
+          </a>
           <a href='#contact' className={baseNav}>
             Contact
           </a>
