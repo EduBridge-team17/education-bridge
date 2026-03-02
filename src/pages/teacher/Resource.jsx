@@ -39,7 +39,6 @@ const Resource = () => {
       case 3:
         return (
           <div className="p-10 text-center">
-            {/* Replace this with your Review component code */}
             <h2 className="text-h2 font-bold text-primary-800">Step 3: Review Screen</h2>
             <button onClick={prevStep} className="mt-4 text-neutral-1000 underline">Back</button>
           </div>

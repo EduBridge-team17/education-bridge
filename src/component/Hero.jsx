@@ -43,14 +43,6 @@ const Hero = () => {
               </NavLink>
               <ArrowRight size={18} />
             </Button>
-
-            <Button
-              variant='secondary'
-              size='lg'
-              className='flex items-center justify-center gap-2 rounded-lg text-p3 bg-orange-400 hover:bg-orange-600'
-            >
-              <NavLink to='/partnerships'>Partner With Us</NavLink>
-            </Button>
           </div>
 
           <div className='mt-8 flex flex-col sm:flex-row gap-6 text-sm md:text-sm text-neutral-3000 justify-center md:justify-start'>
@@ -75,7 +67,7 @@ const Hero = () => {
           <img
             src={student}
             alt='Student studying'
-            className='w-full rounded-2xl shadow-xl'
+            className='w-full rounded-3xl shadow-xl'
           />
 
           <div className='absolute bottom-6 right-6 bg-white rounded-xl shadow-md px-4 py-3 flex items-center gap-3'>

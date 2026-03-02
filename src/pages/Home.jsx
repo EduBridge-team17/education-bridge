@@ -4,12 +4,14 @@ import Hero from '../component/Hero';
 import HowItWorks from '../component/HowItWorks';
 import Footer from '../component/Footer';
 import ResourcesPage from './teacher/Resource';
+import Partnership from '../component/PartnerWithUs';
 const Home = () => {
   return (
     <>
       <NavBar />
       <Hero />
       <HowItWorks />
+      {/* <Partnership /> */}
       <ResourcesPage />
       <Footer />
       

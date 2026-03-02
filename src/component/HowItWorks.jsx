@@ -6,6 +6,7 @@ import Vector from '../assets/images/Vector.svg';
 import partnership from '../assets/images/partnership.png';
 import QualityEducation from '../assets/images/QualityEducation.png';
 import map from '../assets/images/map.png';
+import Partnership from './PartnerWithUs';
 const HowItWorks = () => {
   return (
     <>
@@ -81,6 +82,7 @@ const HowItWorks = () => {
         </div>
       </section>
 
+      <Partnership/>
       {/*SUSTAINABLE FUTURE */}
       <section className='bg-primary-800 py-20 px-4 md:px-10 text-neutral-50 font-secondary'>
         <div className='max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center'>
