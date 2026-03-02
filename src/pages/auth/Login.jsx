@@ -31,7 +31,7 @@ const Login = () => {
         setErrorMessage(error.message);
       } else {
         localStorage.setItem('token', data.session.access_token);
-        navigate('/dashboard'); // redirect after login
+        navigate('/dashboard');
       }
     } catch (err) {
       setErrorMessage('Login failed. Try again.');
