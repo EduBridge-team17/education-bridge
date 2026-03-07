@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import {
   CloudUpload, PlusSquare, BarChart3, Settings, LogOut, Search, Bell,
   ChevronDown, BookText, FlaskConical, GraduationCap, Calculator, Book,
-  Zap, Leaf, LineChart, Globe2, Users2, History, ArrowRight, Menu, X
+  Zap, Leaf, LineChart, Globe2, Users2, History, ArrowRight, Menu, X,
+  User, School
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../component/Button';
@@ -12,90 +13,17 @@ const TeacherDashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [teacher, setTeacher] = useState(null);
-  const [classes, setClasses] = useState([]);
+  const [levels, setLevels] = useState([]);
   const [subjects, setSubjects] = useState([]);
-  const [selectedClass, setSelectedClass] = useState('');
+  const [selectedLevel, setSelectedLevel] = useState('');
   const [selectedSubject, setSelectedSubject] = useState('');
-  const [classProgress, setClassProgress] = useState(null);
+  const [profileModalOpen, setProfileModalOpen] = useState(false);
+  const [school, setSchool] = useState(null);
+  const [phone, setPhone] = useState('');
+  const [schoolName, setSchoolName] = useState('');
+  const [saving, setSaving] = useState(false);
 
-  // Get user from localStorage (set during login)
-  useEffect(() => {
-    const userStr = localStorage.getItem('user');
-    if (!userStr) {
-      navigate('/login');
-      return;
-    }
-    const user = JSON.parse(userStr);
-    setTeacher(user);
-  }, [navigate]);
-
-  // Fetch teacher's classes and subjects when teacher is loaded
-  useEffect(() => {
-    if (!teacher) return;
-
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const token = localStorage.getItem('token');
-        const API_URL = import.meta.env.VITE_API_URL || 'https://edu-bridge-backend-z68e.onrender.com';
-
-        // Fetch classes
-        const classesRes = await fetch(`${API_URL}/api/classes?teacher_id=${teacher.id}`, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-        if (classesRes.ok) {
-          const classesData = await classesRes.json();
-          setClasses(classesData);
-          if (classesData.length > 0) setSelectedClass(classesData[0].id);
-        } else {
-          console.error('Failed to fetch classes');
-        }
-
-        // Fetch subjects
-        const subjectsRes = await fetch(`${API_URL}/api/subjects`, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-        if (subjectsRes.ok) {
-          const subjectsData = await subjectsRes.json();
-          setSubjects(subjectsData);
-        } else {
-          console.error('Failed to fetch subjects');
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [teacher]);
-
-  // Fetch class progress when a class is selected
-  useEffect(() => {
-    if (!selectedClass) return;
-
-    const fetchProgress = async () => {
-      const token = localStorage.getItem('token');
-      const API_URL = import.meta.env.VITE_API_URL || 'https://edu-bridge-backend-z68e.onrender.com';
-      const res = await fetch(`${API_URL}/api/progress/teacher/${selectedClass}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      if (res.ok) {
-        const data = await res.json();
-        setClassProgress(data);
-      }
-    };
-    fetchProgress();
-  }, [selectedClass]);
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    navigate('/login');
-  };
-
-  // Fallback icons for subjects (you can expand this mapping)
+  // Icons for subjects (still needed for display)
   const subjectIconMap = {
     Mathematics: <Calculator size={20} className="text-blue-500" />,
     English: <Book size={20} className="text-red-400" />,
@@ -109,6 +37,131 @@ const TeacherDashboard = () => {
     Literature: <History size={20} className="text-pink-500" />,
   };
 
+  // Get user from localStorage
+  useEffect(() => {
+    const userStr = localStorage.getItem('user');
+    if (!userStr) {
+      navigate('/login');
+      return;
+    }
+    setTeacher(JSON.parse(userStr));
+  }, [navigate]);
+
+  // Fetch levels, subjects, and school data when teacher is loaded
+  useEffect(() => {
+    if (!teacher) return;
+
+    const fetchData = async () => {
+      setLoading(true);
+      const token = localStorage.getItem('token');
+      const API_URL = import.meta.env.VITE_API_URL || 'https://edu-bridge-backend-z68e.onrender.com';
+
+      try {
+        // Fetch levels
+        const levelsRes = await fetch(`${API_URL}/api/levels`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        if (levelsRes.ok) {
+          const levelsData = await levelsRes.json();
+          setLevels(levelsData);
+        }
+
+        // Fetch subjects
+        const subjectsRes = await fetch(`${API_URL}/api/subjects`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        if (subjectsRes.ok) {
+          const subjectsData = await subjectsRes.json();
+          setSubjects(subjectsData);
+        }
+
+        // Fetch teacher's school
+        const schoolRes = await fetch(`${API_URL}/api/users/me/school`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        if (schoolRes.ok) {
+          const schoolData = await schoolRes.json();
+          setSchool(schoolData);
+          if (schoolData) {
+            setSchoolName(schoolData.name);
+          }
+        }
+
+        // Prefill phone from teacher object
+        setPhone(teacher.phone || '');
+      } catch (err) {
+        console.error('Error fetching data:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [teacher]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    navigate('/login');
+  };
+
+  const handleNextStep = () => {
+    if (!selectedLevel || !selectedSubject) {
+      alert('Please select both a class level and a subject.');
+      return;
+    }
+    // Navigate to lesson creation page with state
+    navigate('/teacher/create-lesson', {
+      state: { levelId: selectedLevel, levelName: levels.find(l => l.id === selectedLevel)?.name, subject: selectedSubject }
+    });
+  };
+
+  const updateProfile = async () => {
+    setSaving(true);
+    const token = localStorage.getItem('token');
+    const API_URL = import.meta.env.VITE_API_URL || 'https://edu-bridge-backend-z68e.onrender.com';
+
+    try {
+      // Update phone
+      if (phone !== teacher.phone) {
+        await fetch(`${API_URL}/api/users/me`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({ phone })
+        });
+      }
+
+      // Update school name if school exists and name changed
+      if (school && schoolName !== school.name) {
+        await fetch(`${API_URL}/api/schools/${school.id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({ name: schoolName })
+        });
+        // Update local school object
+        setSchool({ ...school, name: schoolName });
+      }
+
+      // Update local teacher object (phone)
+      setTeacher({ ...teacher, phone });
+      localStorage.setItem('user', JSON.stringify({ ...teacher, phone }));
+
+      setProfileModalOpen(false);
+      alert('Profile updated successfully!');
+    } catch (err) {
+      console.error('Error updating profile:', err);
+      alert('Failed to update profile.');
+    } finally {
+      setSaving(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -119,10 +172,12 @@ const TeacherDashboard = () => {
 
   return (
     <div className="flex h-screen bg-[#F9FAFB] font-sans relative">
-      {/* Sidebar (same as before) */}
+      {/* Sidebar backdrop */}
       {sidebarOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden" onClick={() => setSidebarOpen(false)} />
       )}
+
+      {/* Sidebar (unchanged) */}
       <aside className={`
         fixed lg:static inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-200 
         transform transition-transform duration-300 ease-in-out
@@ -175,6 +230,7 @@ const TeacherDashboard = () => {
       </aside>
 
       <main className="flex-1 flex flex-col overflow-hidden">
+        {/* Header */}
         <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4 sm:px-6 lg:px-10">
           <button onClick={() => setSidebarOpen(true)} className="lg:hidden p-2 text-gray-600 hover:text-[#0D685E]">
             <Menu size={24} />
@@ -193,7 +249,7 @@ const TeacherDashboard = () => {
               <span className="text-sm font-medium text-gray-700">English</span>
               <ChevronDown size={14} className="text-gray-400" />
             </div>
-            <div className="flex items-center gap-3 cursor-pointer">
+            <div className="flex items-center gap-3 cursor-pointer relative">
               <div className="w-9 h-9 bg-[#F97316] rounded-full flex items-center justify-center text-white text-[11px] font-extrabold shadow-sm">
                 {teacher?.name?.split(' ').map(n => n[0]).join('').slice(0,2) || 'T'}
               </div>
@@ -202,10 +258,17 @@ const TeacherDashboard = () => {
                 <p className="text-[10px] text-gray-500 mt-1">{teacher?.role || 'Teacher'}</p>
               </div>
               <ChevronDown size={14} className="text-gray-400 hidden sm:block" />
+              {/* Simple dropdown – you can make it a proper menu later */}
+              <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg hidden group-hover:block">
+                <div onClick={() => setProfileModalOpen(true)} className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+                  <User size={16} /> Edit Profile
+                </div>
+              </div>
             </div>
           </div>
         </header>
 
+        {/* Main content */}
         <div className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-12">
           <div className="max-w-4xl mx-auto">
             {/* Step indicator */}
@@ -219,30 +282,34 @@ const TeacherDashboard = () => {
               </div>
             </div>
 
-            {/* Class selection (dynamic) */}
+            {/* Class level selection (dynamic from API) */}
             <section className="mb-10 sm:mb-14">
               <div className="flex items-center gap-3 mb-8">
                 <div className="w-7 h-7 bg-[#E0E7FF] text-[#4F46E5] rounded-full flex items-center justify-center text-[11px] font-bold">1</div>
                 <h2 className="text-[15px] font-bold text-gray-800">Select Class</h2>
               </div>
-              {classes.length === 0 ? (
-                <p className="text-gray-500">You have no classes assigned yet.</p>
+              {levels.length === 0 ? (
+                <p className="text-gray-500">No levels available.</p>
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
-                  {classes.map((cls) => (
+                  {levels.map((lvl) => (
                     <div
-                      key={cls.id}
-                      onClick={() => setSelectedClass(cls.id)}
+                      key={lvl.id}
+                      onClick={() => setSelectedLevel(lvl.id)}
                       className={`p-6 sm:p-10 rounded-3xl border-2 transition-all cursor-pointer text-center flex flex-col items-center gap-4 sm:gap-6 shadow-sm hover:shadow-md ${
-                        selectedClass === cls.id ? 'bg-white border-[#0D685E]' : 'border-gray-100 bg-white'
+                        selectedLevel === lvl.id ? 'bg-white border-[#0D685E]' : 'border-gray-100 bg-white'
                       }`}
                     >
-                      <div className="p-4 sm:p-6 rounded-2xl bg-[#EFF6FF]">
-                        <BookText className="text-[#3B82F6]" size={36} />
+                      <div className={`p-4 sm:p-6 rounded-2xl ${
+                        lvl.name === 'SS1' ? 'bg-[#EFF6FF]' : lvl.name === 'SS2' ? 'bg-[#F0FDF4]' : 'bg-[#FFFBEB]'
+                      }`}>
+                        {lvl.name === 'SS1' && <BookText className="text-[#3B82F6]" size={36} />}
+                        {lvl.name === 'SS2' && <FlaskConical className="text-[#22C55E]" size={36} />}
+                        {lvl.name === 'SS3' && <GraduationCap className="text-[#F59E0B]" size={36} />}
                       </div>
                       <div>
-                        <p className="text-lg sm:text-xl font-black text-gray-800 tracking-tight">{cls.name}</p>
-                        <p className="text-[8px] sm:text-[10px] text-gray-400 font-medium uppercase tracking-widest mt-1">Class</p>
+                        <p className="text-lg sm:text-xl font-black text-gray-800 tracking-tight">{lvl.name}</p>
+                        <p className="text-[8px] sm:text-[10px] text-gray-400 font-medium uppercase tracking-widest mt-1">{lvl.description}</p>
                       </div>
                     </div>
                   ))}
@@ -250,7 +317,7 @@ const TeacherDashboard = () => {
               )}
             </section>
 
-            {/* Subject selection (dynamic) */}
+            {/* Subject selection (dynamic from API) */}
             <section className="mb-10 sm:mb-14">
               <div className="flex items-center gap-3 mb-8">
                 <div className="w-7 h-7 bg-[#E0E7FF] text-[#4F46E5] rounded-full flex items-center justify-center text-[11px] font-bold">2</div>
@@ -281,6 +348,7 @@ const TeacherDashboard = () => {
             {/* Next button */}
             <div className="flex justify-end mt-8 sm:mt-16">
               <Button
+                onClick={handleNextStep}
                 variant="primary"
                 size="lg"
                 className="!bg-[#0D685E] hover:!bg-[#0a524a] !rounded-2xl flex items-center gap-3 !px-6 sm:!px-12 !py-3 sm:!py-4 font-bold text-xs sm:text-sm shadow-lg shadow-[#0D685E]/20"
@@ -291,6 +359,53 @@ const TeacherDashboard = () => {
           </div>
         </div>
       </main>
+
+      {/* Profile Edit Modal */}
+      {profileModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl max-w-md w-full p-6">
+            <h3 className="text-xl font-bold text-gray-800 mb-4">Edit Profile</h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">School Name</label>
+                <input
+                  type="text"
+                  value={schoolName}
+                  onChange={(e) => setSchoolName(e.target.value)}
+                  placeholder="e.g., Government Secondary School"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0D685E]"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                <input
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="+234 800 000 0000"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0D685E]"
+                />
+              </div>
+            </div>
+            <div className="flex justify-end gap-3 mt-6">
+              <Button
+                variant="secondary"
+                onClick={() => setProfileModalOpen(false)}
+                className="!bg-gray-200 !text-gray-800 hover:!bg-gray-300"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={updateProfile}
+                disabled={saving}
+                className="!bg-[#0D685E] hover:!bg-[#0a524a] !text-white"
+              >
+                {saving ? 'Saving...' : 'Save'}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
