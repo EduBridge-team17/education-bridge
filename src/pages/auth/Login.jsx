@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { supabase } from '../../supabaseClient';
+// import { supabase } from '../../supabaseClient';
 import { useNavigate } from 'react-router-dom';
-import { User, Mail, Smartphone, Lock, Eye, EyeOff, GraduationCap, Info } from 'lucide-react';
+import { User, Mail, Lock, Eye, EyeOff, GraduationCap, Info } from 'lucide-react';
 import Button from '../../component/Button';
 
 const Login = () => {
@@ -10,7 +10,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [selectedRole, setSelectedRole] = useState('student'); // visual only
-  
+
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -28,10 +28,9 @@ const Login = () => {
 
     try {
       const API_URL = import.meta.env.VITE_API_URL || 'https://edu-bridge-backend-z68e.onrender.com';
-      
-      // Create a timeout promise
+
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 seconds
+      const timeoutId = setTimeout(() => controller.abort(), 10000);
 
       const response = await fetch(`${API_URL}/api/auth/login`, {
         method: 'POST',
@@ -48,11 +47,9 @@ const Login = () => {
         throw new Error(data.error || `Login failed with status ${response.status}`);
       }
 
-      // Store token and user
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
 
-      // Redirect based on role
       const userRole = data.user?.role;
       if (userRole === 'teacher') {
         navigate('/teacher-dashboard');
@@ -61,7 +58,7 @@ const Login = () => {
       } else if (userRole === 'ngo') {
         navigate('/ngo-dashboard');
       } else {
-        navigate('/dashboard'); // fallback
+        navigate('/dashboard');
       }
     } catch (error) {
       console.error('Login error:', error);
@@ -80,6 +77,7 @@ const Login = () => {
       {/* Main card */}
       <div className='w-full max-w-[1000px] bg-white rounded-2xl overflow-hidden shadow-2xl border border-neutral-200'>
         <div className='flex flex-col lg:flex-row'>
+
           {/* Left side - Branding */}
           <div className='lg:w-1/2 bg-primary-800 p-8 flex flex-col justify-between relative overflow-hidden'>
             <div>
@@ -123,6 +121,7 @@ const Login = () => {
             )}
 
             <form onSubmit={handleLogin} className='space-y-4'>
+
               {/* Full Name field (UI only) */}
               <div>
                 <label className='block text-xs font-semibold text-primary-900 mb-1'>Full Name</label>
@@ -198,6 +197,7 @@ const Login = () => {
               >
                 {isLoading ? 'Logging in...' : 'Log in →'}
               </Button>
+
             </form>
 
             {/* Divider */}
@@ -210,7 +210,7 @@ const Login = () => {
             {/* Google Button */}
             <button
               type='button'
-              className='w-full flex items-center justify-center gap-2 py-2.5 border border-neutral-700 rounded-lg text-sm font-medium text hover:bg-neutral-50 transition'
+              className='w-full flex items-center justify-center gap-2 py-2.5 border border-neutral-700 rounded-lg text-sm font-medium hover:bg-neutral-50 transition'
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -232,6 +232,7 @@ const Login = () => {
               </span>
             </p>
           </div>
+
         </div>
       </div>
 

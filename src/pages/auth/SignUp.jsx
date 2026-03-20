@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { User, Mail, Lock, Eye, EyeOff, GraduationCap, Smartphone, Info } from 'lucide-react';
-import { supabase } from '../../supabaseClient';
+// import { supabase } from '../../supabaseClient.js';
 import SuccessModal from '../../component/Modal';
 import Button from '../../component/Button';
 
@@ -32,19 +32,19 @@ const SignUp = () => {
 
     try {
       // Create user in Supabase Auth – trigger will copy to public.users
-      const { data, error } = await supabase.auth.signUp({
-        email: formData.email,
-        password: formData.password,
-        options: {
-          data: {
-            name: formData.fullName,
-            role: formData.role,
-            phone: formData.phone,
-            language: 'en',        // default language
-            status: 'active'        // account status
-          }
-        }
-      });
+      // const { data, error } = await supabase.auth.signUp({
+      //   email: formData.email,
+      //   password: formData.password,
+      //   options: {
+      //     data: {
+      //       name: formData.fullName,
+      //       role: formData.role,
+      //       phone: formData.phone,
+      //       language: 'en',        // default language
+      //       status: 'active'        // account status
+      //     }
+      //   }
+      // });
 
       if (error) throw error;
 
