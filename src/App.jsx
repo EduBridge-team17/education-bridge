@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import './index.css';
 import { Route, Routes } from 'react-router-dom';
 import NavBar from './component/NavBar';
@@ -9,6 +9,8 @@ import TeacherDashboard from './pages/teacher/TeacherDashboard';
 import StudentDashboard from './pages/student/StudentDashboard';
 import NgoDashboard from './pages/ngo/NgoDashboard';
 import CreateLesson from './pages/teacher/CreateLesson';
+import Resource from './pages/teacher/Resource';
+import UploadStep from './pages/teacher/UploadContent';
 
 function App() {
   return (
@@ -21,7 +23,9 @@ function App() {
 
         <Route path='/student-dashboard' element={<StudentDashboard />} />
         <Route path='/ngo-dashboard' element={<NgoDashboard />} />
-        <Route path="/teacher/create-lesson" element={<CreateLesson />} />
+        <Route path='/teacher/upload' element={<Resource />} />
+        <Route path='/teacher/create-quiz' element={<UploadStep />} />
+        <Route path='/teacher/create-lesson' element={<CreateLesson />} />
       </Routes>
     </>
   );
