@@ -40,8 +40,7 @@ const SignUp = () => {
     setErrorMessage('');
 
     try {
-      // Create user in Supabase Auth – trigger will copy to public.users
-      const { data, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
         options: {
@@ -49,15 +48,14 @@ const SignUp = () => {
             name: formData.fullName,
             role: formData.role,
             phone: formData.phone,
-            language: 'en', // default language
-            status: 'active', // account status
+            language: 'en',
+            status: 'active',
           },
         },
       });
 
       if (error) throw error;
 
-      // No manual insert – the database trigger handles it
       setIsSuccessOpen(true);
     } catch (err) {
       setErrorMessage(err.message || 'Signup failed. Please try again.');
@@ -69,10 +67,8 @@ const SignUp = () => {
   return (
     <>
       <div className='min-h-screen w-full bg-neutral-100 flex flex-col items-center justify-center p-4 font-secondary'>
-        {/* Main card */}
         <div className='w-full max-w-[1000px] bg-white rounded-2xl overflow-hidden shadow-2xl border border-neutral-200'>
           <div className='flex flex-col lg:flex-row'>
-            {/* Left side - Branding (identical to Login) */}
             <div className='lg:w-1/2 bg-primary-800 p-8 flex flex-col justify-between relative overflow-hidden'>
               <div>
                 <div className='flex items-center gap-2 mb-6'>
@@ -92,7 +88,6 @@ const SignUp = () => {
                 </p>
               </div>
 
-              {/* Faces + Trusted text */}
               <div className='mt-10'>
                 <div className='flex -space-x-2 mb-2'>
                   {[1, 2, 3].map((i) => (
@@ -111,7 +106,6 @@ const SignUp = () => {
               </div>
             </div>
 
-            {/* Right side - Signup form */}
             <div className='lg:w-1/2 p-8 bg-white'>
               <h2 className='text-2xl font-bold text-primary-900 mb-1'>
                 Create account
@@ -119,8 +113,6 @@ const SignUp = () => {
               <p className='text-sm text-neutral-800 mb-4'>
                 Start your learning journey today.
               </p>
-
-              {/* Role dropdown */}
               <select
                 name='role'
                 value={formData.role}
@@ -143,7 +135,6 @@ const SignUp = () => {
               )}
 
               <form onSubmit={handleSignUp} className='space-y-4'>
-                {/* Full Name */}
                 <div>
                   <label className='block text-xs font-semibold text-primary-900 mb-1'>
                     Full Name
@@ -165,7 +156,6 @@ const SignUp = () => {
                   </div>
                 </div>
 
-                {/* Email */}
                 <div>
                   <label className='block text-xs font-semibold text-primary-900 mb-1'>
                     Email Address
@@ -187,7 +177,6 @@ const SignUp = () => {
                   </div>
                 </div>
 
-                {/* Phone */}
                 <div>
                   <label className='block text-xs font-semibold text-primary-900 mb-1'>
                     Phone Number
@@ -209,7 +198,6 @@ const SignUp = () => {
                   </div>
                 </div>
 
-                {/* Password */}
                 <div>
                   <label className='block text-xs font-semibold text-primary-900 mb-1'>
                     Password
@@ -251,7 +239,6 @@ const SignUp = () => {
                 </Button>
               </form>
 
-              {/* Divider (matches Login) */}
               <div className='flex items-center my-6'>
                 <div className='flex-1 h-px bg-neutral-600' />
                 <span className='px-3 text-xs text-neutral-800'>
@@ -260,7 +247,6 @@ const SignUp = () => {
                 <div className='flex-1 h-px bg-neutral-600' />
               </div>
 
-              {/* Google Button (matches Login) */}
               <button
                 type='button'
                 className='w-full flex items-center justify-center gap-2 py-2.5 border border-neutral-700 rounded-lg text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition'
@@ -291,7 +277,6 @@ const SignUp = () => {
                 Continue with Google
               </button>
 
-              {/* Sign in link */}
               <p className='text-center text-sm text-neutral-900 mt-6'>
                 Already have an account?{' '}
                 <span
@@ -305,7 +290,6 @@ const SignUp = () => {
           </div>
         </div>
 
-        {/* Footer links (matches Login) */}
         <div className='flex gap-4 text-xs text-neutral-500 mt-4'>
           <a href='#' className='hover:underline'>
             Privacy Policy
@@ -325,7 +309,13 @@ const SignUp = () => {
         title='Account Created Successfully!'
         message='Welcome to Education Bridge. You are all set.'
         buttonText='Continue to Dashboard'
-        onConfirm={() => navigate('/dashboard')}
+        onConfirm={() => {
+          const role = formData.role;
+          if (role === 'teacher') navigate('/teacher-dashboard');
+          else if (role === 'student') navigate('/student-dashboard');
+          else if (role === 'ngo') navigate('/ngo-dashboard');
+          else navigate('/login');
+        }}
       />
     </>
   );

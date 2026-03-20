@@ -31,7 +31,7 @@ import Button from '../../component/Button';
 const CreateLesson = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { subject, levelName, levelId } = location.state || {};
+  const { subject, levelName } = location.state || {};
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [teacher, setTeacher] = useState(null);
@@ -268,7 +268,6 @@ const CreateLesson = () => {
         {/* Main content area */}
         <div className='flex-1 overflow-y-auto p-4 sm:p-6 lg:p-12'>
           <div className='max-w-3xl mx-auto'>
-            {/* Step indicator – now step 2 of 3 */}
             <div className='mb-8 sm:mb-12'>
               <div className='flex justify-between items-center mb-3'>
                 <span className='text-[13px] font-bold text-[#0D685E]'>
@@ -283,7 +282,6 @@ const CreateLesson = () => {
               </div>
             </div>
 
-            {/* Back button and currently editing indicator */}
             <div className='flex items-center gap-4 mb-6'>
               <div className='bg-white rounded-xl shadow-sm p-4 flex-1 border border-gray-200'>
                 <p className='text-xs text-gray-500 mb-1'>CURRENTLY EDITING</p>

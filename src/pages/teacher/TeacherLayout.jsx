@@ -1,8 +1,19 @@
-import React from 'react';
 import { Search, Bell, ChevronDown, Menu } from 'lucide-react';
 import SideBar from '../../component/SideBar';
 
 const DashboardLayout = ({ children, activeTab, toggleMobileMenu }) => {
+  const userStr = localStorage.getItem('user');
+  const teacher = userStr ? JSON.parse(userStr) : null;
+  const getInitials = (name) => {
+    if (!name) return 'T';
+    return name
+      .split(' ')
+      .map((n) => n[0])
+      .join('')
+      .slice(0, 2)
+      .toUpperCase();
+  };
+
   return (
     <div className='flex h-screen bg-[#F9FAFB] font-sans overflow-hidden'>
       <SideBar activeTab={activeTab} />
@@ -55,14 +66,14 @@ const DashboardLayout = ({ children, activeTab, toggleMobileMenu }) => {
 
             <div className='flex items-center gap-3 pl-4 border-l border-gray-100 lg:border-none lg:pl-0 cursor-pointer group'>
               <div className='w-9 h-9 bg-[#F97316] rounded-full flex items-center justify-center text-white text-[11px] font-extrabold shadow-sm ring-2 ring-transparent group-hover:ring-[#F97316]/20 transition-all'>
-                CO
+                {getInitials(teacher?.name)}
               </div>
               <div className='hidden lg:block text-left'>
                 <p className='text-[13px] font-bold text-gray-800 leading-none group-hover:text-[#0D685E]'>
-                  Chidi O.
+                  {teacher?.name?.split(' ').slice(0, 2).join(' ') || 'Teacher'}
                 </p>
-                <p className='text-[10px] text-gray-500 mt-1 font-medium'>
-                  Teacher
+                <p className='text-[10px] text-gray-500 mt-1 font-medium capitalize'>
+                  {teacher?.role || 'Teacher'}
                 </p>
               </div>
               <ChevronDown
