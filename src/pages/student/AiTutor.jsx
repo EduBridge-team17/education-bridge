@@ -226,15 +226,15 @@ const AiTutor = () => {
         <div className="flex-1 flex overflow-hidden">
 
           {/* ── LEFT: Quiz Results ── */}
-          <div className="flex-1 overflow-y-auto px-6 py-4">
+          <div className= "flex-1 overflow-y-auto px-6 py-4 rounded-2xl border border-gray-200">
 
             {/* Score hero */}
             <div className="flex items-start gap-6 mb-6">
               {/* Outer square card */}
               <div className="w-[100px] h-[100px] shrink-0 rounded-2xl bg-teal-600 flex flex-col items-center justify-center">
-                <div className="w-[72px] h-[72px] rounded-full bg-white-400 flex flex-col items-center justify-center">
-                  <span className="text-[22px] font-black text-white leading-none">80%</span>
-                  <span className="text-[9px] font-semibold text-white/80 mt-0.5">SCORE</span>
+                <div className="w-[72px] h-[72px] rounded-full bg-white flex flex-col items-center justify-center">
+                  <span className="text-[22px] font-black text-teal-700 leading-none">80%</span>
+                  <span className="text-[9px] font-semibold text-gray-600/80 mt-0.5">SCORE</span>
                 </div>
               </div>
               {/* Text */}
@@ -252,7 +252,7 @@ const AiTutor = () => {
                     <Icon icon="mdi:close-circle-outline" width={15} />
                     5 Incorrect
                   </div>
-                  <div className="flex items-center gap-1.5 text-[12px] text-gray-500 font-semibold">
+                  <div className="flex items-center gap-1.5 text-[12px] text-blue-500 font-semibold">
                     <Icon icon="mdi:clock-outline" width={15} />
                     12m 30s
                   </div>
@@ -304,7 +304,7 @@ const AiTutor = () => {
           {/* ── end LEFT ── */}
 
           {/* ── RIGHT: AI Tutor Panel ── */}
-          <div className="w-[320px] shrink-0 border-l border-gray-100 bg-white flex flex-col overflow-hidden">
+          <div className="w-[320px] shrink-0 border-l border-gray-100 bg-white flex flex-col border border-gray-200 rounded-2xl overflow-hidden">
 
             {/* AI Header */}
             <div className="bg-blue-600 px-4 py-3 flex items-center justify-between shrink-0">
@@ -314,7 +314,7 @@ const AiTutor = () => {
                 </div>
                 <div>
                   <p className="text-[13px] font-bold text-white">AI Tutor</p>
-                  <p className="text-[10px] text-teal-100">Always here to help</p>
+                  <p className="text-[10px] text-gray-100">Always here to help</p>
                 </div>
               </div>
               <button className="w-7 h-7 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors">
