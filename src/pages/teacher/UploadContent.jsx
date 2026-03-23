@@ -684,7 +684,6 @@ const UploadContent = ({ examMeta, onBack, onPublish }) => {
           )}
         </section>
 
-        {/* 2 – Lesson Content */}
         <section>
           <div className='flex items-center gap-3 mb-4'>
             <div className='w-7 h-7 bg-teal-50 text-teal-700 rounded-full flex items-center justify-center text-xs font-bold shrink-0'>
@@ -737,7 +736,6 @@ const UploadContent = ({ examMeta, onBack, onPublish }) => {
           )}
         </section>
 
-        {/* 3 – Attachments */}
         <section>
           <div className='flex items-center gap-3 mb-4'>
             <div className='w-7 h-7 bg-teal-50 text-teal-700 rounded-full flex items-center justify-center text-xs font-bold shrink-0'>
@@ -833,7 +831,6 @@ const UploadContent = ({ examMeta, onBack, onPublish }) => {
 };
 
 // SUCCESS TOAST
-
 const SuccessToast = ({ onDone }) => {
   useEffect(() => {
     const t = setTimeout(onDone, 3500);
@@ -1376,8 +1373,6 @@ const PerformanceSummary = ({ onUploadAnother }) => {
     </div>
   );
 };
-
-// MAIN EXPORT
 
 const UploadStep = () => {
   const navigate = useNavigate();
