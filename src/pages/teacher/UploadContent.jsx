@@ -130,46 +130,63 @@ const Sidebar = ({ activePage = 'upload' }) => (
   </aside>
 );
 
-const TopBar = () => (
-  <header className='h-14 lg:h-16 bg-white border-b border-gray-200 px-4 lg:px-8 flex items-center justify-between shrink-0 gap-4'>
-    <div className='relative w-full max-w-xs hidden sm:block'>
-      <Search
-        className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-400'
-        size={18}
-      />
-      <input
-        type='text'
-        placeholder='Search'
-        className='w-full bg-gray-50 border border-gray-200 rounded-full py-2 pl-10 text-sm outline-none'
-      />
-    </div>
-    <div className='flex items-center gap-2 text-teal-800 lg:hidden'>
-      <div className='w-7 h-7 bg-teal-700 rounded-md flex items-center justify-center text-white'>
-        <BookOpen size={15} />
+const TopBar = () => {
+  const userStr = localStorage.getItem('user');
+  const user = userStr ? JSON.parse(userStr) : null;
+  const getInitials = (name) => {
+    if (!name) return 'T';
+    return name
+      .split(' ')
+      .map((n) => n[0])
+      .join('')
+      .slice(0, 2)
+      .toUpperCase();
+  };
+  return (
+    <header className='h-14 lg:h-16 bg-white border-b border-gray-200 px-4 lg:px-8 flex items-center justify-between shrink-0 gap-4'>
+      <div className='relative w-full max-w-xs hidden sm:block'>
+        <Search
+          className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-400'
+          size={18}
+        />
+        <input
+          type='text'
+          placeholder='Search'
+          className='w-full bg-gray-50 border border-gray-200 rounded-full py-2 pl-10 text-sm outline-none'
+        />
       </div>
-      <span className='font-bold text-sm'>Education Bridge</span>
-    </div>
-    <div className='flex items-center gap-3 lg:gap-5 shrink-0'>
-      <div className='relative'>
-        <Bell size={20} className='text-gray-500' />
-        <span className='absolute -top-1 -right-1 bg-red-500 text-white text-[8px] w-3.5 h-3.5 rounded-full flex items-center justify-center'>
-          6
-        </span>
-      </div>
-      <Globe size={20} className='text-gray-500 hidden sm:block' />
-      <div className='flex items-center gap-2 lg:gap-3 border-l border-gray-200 pl-3 lg:pl-5'>
-        <div className='text-right leading-tight hidden sm:block'>
-          <p className='text-sm font-bold'>Chidi O.</p>
-          <p className='text-xs text-gray-400'>Teacher</p>
+      <div className='flex items-center gap-2 text-teal-800 lg:hidden'>
+        <div className='w-7 h-7 bg-teal-700 rounded-md flex items-center justify-center text-white'>
+          <BookOpen size={15} />
         </div>
-        <div className='w-8 h-8 lg:w-9 lg:h-9 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm relative shrink-0'>
-          CO
-          <div className='absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-400 border-2 border-white rounded-full'></div>
+        <span className='font-bold text-sm'>Education Bridge</span>
+      </div>
+      <div className='flex items-center gap-3 lg:gap-5 shrink-0'>
+        <div className='relative'>
+          <Bell size={20} className='text-gray-500' />
+          <span className='absolute -top-1 -right-1 bg-red-500 text-white text-[8px] w-3.5 h-3.5 rounded-full flex items-center justify-center'>
+            6
+          </span>
+        </div>
+        <Globe size={20} className='text-gray-500 hidden sm:block' />
+        <div className='flex items-center gap-2 lg:gap-3 border-l border-gray-200 pl-3 lg:pl-5'>
+          <div className='text-right leading-tight hidden sm:block'>
+            <p className='text-sm font-bold'>
+              {user?.name?.split(' ').slice(0, 2).join(' ') || 'Teacher'}
+            </p>
+            <p className='text-xs text-gray-400 capitalize'>
+              {user?.role || 'Teacher'}
+            </p>
+          </div>
+          <div className='w-8 h-8 lg:w-9 lg:h-9 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm relative shrink-0'>
+            {getInitials(user?.name)}
+            <div className='absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-400 border-2 border-white rounded-full'></div>
+          </div>
         </div>
       </div>
-    </div>
-  </header>
-);
+    </header>
+  );
+};
 
 // ─── Step indicator bar
 const StepBar = ({ current }) => {
