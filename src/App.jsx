@@ -1,3 +1,4 @@
+// import { useState } from 'react';
 import './index.css';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
@@ -17,6 +18,8 @@ import QuizSession from './pages/student/QuizSession'
 import OfflineScreen from './pages/student/OfflineScreen';
 import AiTutor from './pages/student/AiTutor';
 
+import Resource from './pages/teacher/Resource';
+import UploadStep from './pages/teacher/UploadContent';
 
 function App() {
   return (
@@ -41,7 +44,9 @@ function App() {
 
 
         <Route path='/ngo-dashboard' element={<NgoDashboard />} />
-        <Route path="/teacher/create-lesson" element={<CreateLesson />} />
+        <Route path='/teacher/upload' element={<Resource />} />
+        <Route path='/teacher/create-quiz' element={<UploadStep />} />
+        <Route path='/teacher/create-lesson' element={<CreateLesson />} />
       </Routes>
     </>
   );

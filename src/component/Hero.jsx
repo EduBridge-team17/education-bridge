@@ -38,9 +38,7 @@ const Hero = () => {
               size='lg'
               className='flex items-center justify-center gap-2 rounded-lg text-p3'
             >
-              <NavLink to='/signup'>
-                Get Started 
-              </NavLink>
+              <NavLink to='/signup'>Get Started</NavLink>
               <ArrowRight size={18} />
             </Button>
           </div>

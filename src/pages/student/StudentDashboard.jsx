@@ -50,6 +50,14 @@ const StudentDashboard = () => {
   };
 
   return (
+    <div className='min-h-screen bg-gray-100 p-6'>
+      <div className='max-w-4xl mx-auto bg-white rounded-xl shadow-md p-8'>
+        <div className='flex items-center justify-between mb-6'>
+          <div className='flex items-center gap-2'>
+            <GraduationCap className='text-[#0D685E]' size={24} />
+            <h1 className='text-2xl font-bold text-[#0D685E]'>
+              Student Dashboard
+            </h1>
     <div className="min-h-screen bg-white font-sans">
 
       {/* Top Navbar */}
@@ -58,6 +66,12 @@ const StudentDashboard = () => {
           <div className="bg-teal-50 p-1.5 rounded-full">
             <GraduationCap size={18} className="text-teal-700" />
           </div>
+          <button
+            onClick={() => navigate('/login')}
+            className='flex items-center gap-1 text-red-500 hover:underline'
+          >
+            <LogOut size={18} /> Sign Out
+          </button>
           <span className="text-sm font-bold text-teal-800 tracking-tight">Education Bridge</span>
         </div>
         <button
@@ -82,6 +96,10 @@ const StudentDashboard = () => {
           <Icon icon="ic:baseline-library-books" className="text-teal-700" width={20} height={20} />
           <h3 className="text-xl">Select Your Class</h3>
         </div>
+        <p className='text-gray-600'>
+          Welcome, Student! Your lessons will appear here.
+        </p>
+      </div>
 
         {/* Cards row */}
         <div className="flex flex-col sm:flex-row gap-4 w-full max-w-3xl">
