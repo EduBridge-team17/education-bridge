@@ -12,7 +12,7 @@ import StudentCoursesDashboard from './pages/student/StudentCoursesDashboard'
 import SubjectDetail from './pages/student/SubjectDetail'
 import TopicDetail from './pages/student/TopicDetail'
 import LessonReader from './pages/student/LessonReader'
-import LessonComplete from './pages/student/LessonComplete'
+import LessonComplete from './pages/student/Lessoncomplete'
 import PracticeIntro from './pages/student/PracticeIntro'
 import QuizSession from './pages/student/QuizSession'
 import OfflineScreen from './pages/student/OfflineScreen';

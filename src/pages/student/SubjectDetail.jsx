@@ -3,10 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import StudentSideNav from './components/StudentSideNav';
 
-// ── Subject data ───────────────────────────────────────────────────────────────
-// Every subject ID used in StudentCoursesDashboard must have an entry here.
-// The gradient is expressed as a plain className string — never built dynamically
-// from a data value, because Tailwind's JIT purges strings it can't statically detect.
+
 const subjectData = {
   math: {
     name: 'Mathematics',
@@ -18,7 +15,7 @@ const subjectData = {
     totalTopics: 8,
     totalLessons: 42,
     heroIcon: 'ph:math-operations-bold',
-    // ← static className, NOT a dynamic string interpolated from data
+  
     heroBg: 'from-teal-700 via-teal-600 to-emerald-500',
     topics: [
       { id: 'algebra',     name: 'Algebraic Processes', lessons: 4, quizzes: 2, progress: 75, icon: 'ph:math-operations-bold',  iconColor: 'text-teal-600',   iconBg: 'bg-teal-50',   done: true  },
@@ -241,8 +238,8 @@ const SubjectDetail = () => {
   const subject = subjectData[subjectId] ?? subjectData.math;
 
   const user     = (() => { try { return JSON.parse(localStorage.getItem('user')) || {}; } catch { return {}; } })();
-  const initials = user.fullName
-    ? user.fullName.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()
+  const initials = user.name
+    ? user.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()
     : 'CO';
 
   return (
@@ -292,17 +289,14 @@ const SubjectDetail = () => {
         <main className="flex-1 overflow-y-auto px-6 py-5 pb-10">
           <div className="flex gap-5 w-4/5">
 
-            {/* ── LEFT: hero + topic list ── */}
             <div className="flex-1 min-w-0">
 
-              {/* Hero — gradient is a static className, not a runtime string */}
               <div className={`bg-gradient-to-br ${subject.heroBg} rounded-2xl p-6 mb-5 relative overflow-hidden`}>
                 <div className="absolute right-32 top-4  w-24 h-24 rounded-full bg-white/10" />
                 <div className="absolute right-16 top-10 w-16 h-16 rounded-full bg-white/10" />
                 <div className="absolute -right-4 -bottom-4 w-40 h-40 rounded-full bg-white/10" />
 
                 <div className="relative z-10 flex items-center justify-between gap-6">
-                  {/* Left: text content */}
                   <div className="max-w-lg">
                     <div className="flex items-center gap-2 mb-3">
                       <span className="text-[18px] font-bold text-white/70 uppercase tracking-wider">
@@ -386,7 +380,6 @@ const SubjectDetail = () => {
               </div>
             </div>
 
-            {/* ── RIGHT: student card + other subjects ── */}
             <div className="w-56 shrink-0 space-y-4">
 
               {/* Student card */}

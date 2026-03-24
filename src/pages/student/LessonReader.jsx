@@ -4,7 +4,6 @@ import { Icon } from '@iconify/react';
 import StudentSideNav from './components/StudentSideNav';
 import AIChatModal from './components/Aichatmodal';
 
-// ── Mock lesson content ────────────────────────────────────────────────────────
 const lessonContent = {
   'linear-equations': {
     title: 'Understanding Linear Equations',
@@ -70,7 +69,7 @@ const LessonReader = () => {
   const [marked,   setMarked]   = useState(false);
 
   const user = (() => { try { return JSON.parse(localStorage.getItem('user')) || {}; } catch { return {}; } })();
-  const initials = user.fullName ? user.fullName.split(' ').map(n => n[0]).join('').slice(0,2).toUpperCase() : 'CO';
+  const initials = user.name ? user.name.split(' ').map(n => n[0]).join('').slice(0,2).toUpperCase() : 'CO';
 
   const handleMarkComplete = () => {
     setMarked(true);
@@ -95,13 +94,12 @@ const LessonReader = () => {
             <span className="text-[12px] text-gray-600 font-medium">English</span>
             <div className="w-7 h-7 rounded-full bg-orange-400 flex items-center justify-center text-white text-[10px] font-bold">{initials}</div>
             <div>
-              <p className="text-[11px] font-semibold text-gray-800">{user.fullName || 'Chidi O.'}</p>
+              <p className="text-[11px] font-semibold text-gray-800">{user.name || 'Student'}</p>
               <p className="text-[10px] text-gray-400">Student</p>
             </div>
           </div>
         </header>
-
-        {/* Breadcrumb */}
+        
         <div className="px-6 py-2.5 flex items-center gap-1.5 text-[11px] text-gray-400">
           <button onClick={() => navigate('/student-courses-dashboard')} className="hover:text-teal-600">Home</button>
           <Icon icon="mdi:chevron-right" width={12} />

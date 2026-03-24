@@ -93,7 +93,7 @@ const QuizSession = () => {
   const scorePct = total > 0 ? Math.round((finalCorrect / total) * 100) : 0;
 
   const user = (() => { try { return JSON.parse(localStorage.getItem('user')) || {}; } catch { return {}; } })();
-  const initials = user.fullName ? user.fullName.split(' ').map(n => n[0]).join('').slice(0,2).toUpperCase() : 'CO';
+  const initials = user.naame ? user.name.split(' ').map(n => n[0]).join('').slice(0,2).toUpperCase() : 'CO';
   const progressPct = ((current) / total) * 100;
 
   return (

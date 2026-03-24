@@ -1,8 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 
-// ── Animated score ring ────────────────────────────────────────────────────────
 const ScoreRing = ({ pct }) => {
   const r    = 54;
   const circ = 2 * Math.PI * r;
@@ -13,11 +12,7 @@ const ScoreRing = ({ pct }) => {
     pct >= 60 ? '+Pass'      :
     pct >= 40 ? 'Average'    : 'Keep Trying';
 
-  const passColor =
-    pct >= 80 ? 'text-amber-500' :
-    pct >= 60 ? 'text-teal-600'  :
-    pct >= 40 ? 'text-blue-500'  : 'text-red-400';
-
+    
   const ringColor =
     pct >= 80 ? '#f59e0b' :
     pct >= 60 ? '#14b8a6' :
@@ -45,7 +40,7 @@ const ScoreRing = ({ pct }) => {
   );
 };
 
-// ── Modal ──────────────────────────────────────────────────────────────────────
+
 const QuizResultsModal = ({
   topic, subject, subjectId, topicId,
   scorePct, correct, incorrect, elapsed,

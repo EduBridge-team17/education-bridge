@@ -5,14 +5,13 @@ import StudentSideNav from './components/StudentSideNav';
 
 const LessonComplete = () => {
   const navigate = useNavigate();
-  const { subjectId = 'math', topicId = 'algebra', lessonId = 'linear-equations' } = useParams();
+  const { subjectId = 'math', topicId = 'algebra'} = useParams();
   const [show, setShow] = useState(false);
 
   const user = (() => { try { return JSON.parse(localStorage.getItem('user')) || {}; } catch { return {}; } })();
-  const firstName = user.fullName ? user.fullName.split(' ')[0] : 'Chidi';
+  const firstName = user.name ? user.name.split(' ')[0] : 'Chidi';
 
   useEffect(() => {
-    // Stagger entrance
     const t = setTimeout(() => setShow(true), 100);
     return () => clearTimeout(t);
   }, []);
@@ -31,16 +30,16 @@ const LessonComplete = () => {
           </div>
           <div className="flex items-center gap-2 ml-auto">
             <div className="w-7 h-7 rounded-full bg-orange-400 flex items-center justify-center text-white text-[10px] font-bold">
-              {user.fullName ? user.fullName.split(' ').map(n=>n[0]).join('').slice(0,2).toUpperCase() : 'CO'}
+              {user.name ? user.name.split(' ').map(n=>n[0]).join('').slice(0,2).toUpperCase() : 'CO'}
             </div>
             <div>
-              <p className="text-[11px] font-semibold text-gray-800">{user.fullName || 'Chidi O.'}</p>
+              <p className="text-[11px] font-semibold text-gray-800">{user.name || 'Student'}</p>
               <p className="text-[10px] text-gray-400">Student</p>
             </div>
           </div>
         </header>
 
-        {/* Completion content */}
+      
         <main className="flex-1 overflow-y-auto flex items-center justify-center px-6 py-12">
           <div
             className={`w-full max-w-sm text-center transition-all duration-700

@@ -32,7 +32,7 @@ const PracticeIntro = () => {
   const data = practiceData[topicId] ?? practiceData.algebra;
 
   const user = (() => { try { return JSON.parse(localStorage.getItem('user')) || {}; } catch { return {}; } })();
-  const initials = user.fullName ? user.fullName.split(' ').map(n => n[0]).join('').slice(0,2).toUpperCase() : 'CO';
+  const initials = user.name ? user.name.split(' ').map(n => n[0]).join('').slice(0,2).toUpperCase() : 'CO';
 
   return (
     <div className="flex min-h-screen bg-gray-50 font-sans">
@@ -53,14 +53,13 @@ const PracticeIntro = () => {
             <Icon icon="mdi:chevron-up" width={16} className="text-gray-400" />
             <div className="w-7 h-7 rounded-full bg-orange-400 flex items-center justify-center text-white text-[10px] font-bold shrink-0">{initials}</div>
             <div className="leading-tight">
-              <p className="text-[11px] font-semibold text-gray-800">{user.fullName || 'Chidi O.'}</p>
+              <p className="text-[11px] font-semibold text-gray-800">{user.name || 'Student'}</p>
               <p className="text-[10px] text-gray-400">Student</p>
             </div>
             <Icon icon="mdi:chevron-down" width={15} className="text-gray-400" />
           </div>
         </header>
 
-        {/* Breadcrumb */}
         <div className="px-6 py-2.5 flex items-center gap-1.5 text-[11px] text-gray-400 bg-white border-b border-gray-50">
           <button onClick={() => navigate(`/student-subject/${subjectId}`)} className="hover:text-teal-600 transition-colors">{data.subject}</button>
           <Icon icon="mdi:chevron-right" width={12} />
@@ -69,14 +68,11 @@ const PracticeIntro = () => {
           <button onClick={() => navigate(`/student-topic/${subjectId}/${topicId}`)} className="hover:text-teal-600 transition-colors">{data.topic}</button>
         </div>
 
-        {/* Main centered content */}
         <main className="flex-1 flex flex-col items-center justify-center px-6 py-10">
 
           {/* Card */}
           <div className="bg-white border border-gray-100 rounded-3xl shadow-sm w-full max-w-2xl p-8">
             <div className="flex items-center gap-10">
-
-              {/* Left — student illustration */}
               <div className="shrink-0 flex flex-col items-center gap-3">
                 <div className="w-44 h-44 rounded-full overflow-hidden border-4 border-gray-100 bg-gray-50">
                   <img

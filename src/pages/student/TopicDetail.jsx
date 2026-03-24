@@ -73,7 +73,7 @@ const TopicDetail = () => {
   const topic = topicData[topicId] || topicData.algebra;
 
   const user = (() => { try { return JSON.parse(localStorage.getItem('user')) || {}; } catch { return {}; } })();
-  const initials = user.fullName ? user.fullName.split(' ').map(n => n[0]).join('').slice(0,2).toUpperCase() : 'CO';
+  const initials = user.name ? user.name.split(' ').map(n => n[0]).join('').slice(0,2).toUpperCase() : 'CO';
 
   const r = 20, circ = 2 * Math.PI * r;
   const dash = (topic.completed / 100) * circ;

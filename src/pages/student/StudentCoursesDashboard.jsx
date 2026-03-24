@@ -182,8 +182,8 @@ const StudentCoursesDashboard = () => {
     try { return JSON.parse(localStorage.getItem('user')) || {}; } catch { return {}; }
   })();
 
-  const initials = user.fullName
-    ? user.fullName.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()
+  const initials = user.name
+    ? user.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()
     : 'CO';
 
   const filtered = subjects.filter(s =>
