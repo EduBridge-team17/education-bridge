@@ -1,15 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  User,
-  Mail,
-  Lock,
-  Eye,
-  EyeOff,
-  GraduationCap,
-  Smartphone,
-  Info,
-} from 'lucide-react';
+import { User, Mail, Lock, Eye, EyeOff, GraduationCap, Smartphone, Info } from 'lucide-react';
+// import { supabase } from '../../supabaseClient.js';
 import { supabase } from '../../supabaseClient';
 import SuccessModal from '../../component/Modal';
 import Button from '../../component/Button';

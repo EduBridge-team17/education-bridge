@@ -35,7 +35,6 @@ jobs:
       - name: Install Vercel CLI globally
         run: npm install --global vercel@latest
 
-      # ⬇️ ADD THIS STEP BACK – it fetches the project settings
       - name: Pull Vercel environment information
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
         env:
@@ -52,12 +51,11 @@ jobs:
         id: deploy
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-            vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} > deployment_url.txt
+            vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }} > deployment_url.txt
             echo "url=$(cat deployment_url.txt)" >> $GITHUB_OUTPUT
           else
             vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
           fi
-
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
